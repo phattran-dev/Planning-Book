@@ -1,4 +1,4 @@
-﻿namespace PlanningBook.Domain.Constant
+﻿namespace PlanningBook.Domain.Enums
 {
     public enum SortDirection
     {
