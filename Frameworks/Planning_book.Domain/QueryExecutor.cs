@@ -1,4 +1,4 @@
-﻿using Planning_book.Domain.Interfaces;
+﻿using PlanningBook.Domain.Interfaces;
 
 namespace PlanningBook.Domain
 {
