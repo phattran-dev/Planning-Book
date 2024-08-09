@@ -9,7 +9,7 @@ namespace PlanningBook.Identity.Infrastructure
     {
         public PBIdentityDbContext CreateDbContext(string[] args)
         {
-            //// Load configuration
+            // Load configuration
             //var configuration = new ConfigurationBuilder()
             //    .SetBasePath(Directory.GetCurrentDirectory())
             //    .AddJsonFile("appsettings.json")
@@ -21,7 +21,7 @@ namespace PlanningBook.Identity.Infrastructure
             //var connectionString = args[0] ?? configuration[$"{DBEngineConstants.RootConnectionString}:Identity{DBEngineConstants.dbConnectionStringPrefix}"];
 
             var optionsBuilder = new DbContextOptionsBuilder<PBIdentityDbContext>();
-            optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=PlanningBookIdentity;User Id=sa;Password=ThienHoa0096@@;");
+            optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=PlanningBookIdentity;User Id=sa;Password=ThienHoa0096@@;TrustServerCertificate=True;");
             return new PBIdentityDbContext(optionsBuilder.Options);
         }
     }
