@@ -7,13 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Entities\Configurations\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Entities\" />
     <Folder Include="Enums\" />
     <Folder Include="Contants\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
       <PrivateAssets>all</PrivateAssets>
@@ -24,6 +25,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\Presitance\PlanningBook.DBEngine\PlanningBook.DBEngine.csproj" />
   </ItemGroup>
 
 </Project>

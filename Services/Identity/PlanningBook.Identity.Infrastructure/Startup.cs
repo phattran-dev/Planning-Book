@@ -11,9 +11,6 @@ namespace PlanningBook.Identity.Infrastructure
         {
             //TODO-Improve: Use DBEngine in BuildingBlock for add db connection
             services.AddDbContext<PBIdentityDbContext>(options => options.UseSqlServer(configuration[$"{DBEngineConstants.RootConnectionString}:Identity{DBEngineConstants.dbConnectionStringPrefix}"]));
-
-            //services.AddScoped(typeof(IRepositoryBase<,,>), typeof(RepositoryBase<,,>));
-            //services.AddScoped<IUnitOfWork<MateWorkDbContext>>(provider => new UnitOfWork<MateWorkDbContext>(provider));
         }
     }
 }

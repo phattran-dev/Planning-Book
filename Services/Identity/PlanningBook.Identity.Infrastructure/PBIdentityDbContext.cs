@@ -12,7 +12,7 @@ namespace PlanningBook.Identity.Infrastructure
         {
             base.OnModelCreating(builder);
 
-            builder.ApplyConfigurationsFromAssembly(typeof(BaseRelationDbEntityTypeConfiguration<>).Assembly);
+            builder.ApplyConfigurationsFromAssembly(typeof(IBaseEntityTypeConfiguration<>).Assembly);
         }
     }
 }
