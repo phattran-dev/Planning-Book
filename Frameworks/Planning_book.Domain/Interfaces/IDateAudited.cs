@@ -2,7 +2,7 @@
 {
     public interface IDateAudited
     {
-        public DateTime? CreatedDate { get; set; }
-        public DateTime? UpdatedDate { get; set; }
+        DateTime? CreatedDate { get; set; }
+        DateTime? UpdatedDate { get; set; }
     }
 }

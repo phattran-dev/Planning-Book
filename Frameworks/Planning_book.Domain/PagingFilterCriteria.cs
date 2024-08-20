@@ -1,4 +1,5 @@
-﻿using Planning_book.Domain.Constant;
+﻿using PlanningBook.Domain.Constant;
+using PlanningBook.Domain.Enums;
 
 namespace PlanningBook.Domain
 {
