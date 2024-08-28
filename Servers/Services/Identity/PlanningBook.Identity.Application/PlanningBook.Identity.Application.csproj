@@ -6,4 +6,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\Accounts\CommandResults\" />
+    <Folder Include="Queries\Accounts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\Presitance\Planning_book.Repository.EF\PlanningBook.Repository.EF.csproj" />
+    <ProjectReference Include="..\..\..\Frameworks\Planning_book.Domain\PlanningBook.Domain.csproj" />
+    <ProjectReference Include="..\PlanningBook.Identity.Infrastructure\PlanningBook.Identity.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
