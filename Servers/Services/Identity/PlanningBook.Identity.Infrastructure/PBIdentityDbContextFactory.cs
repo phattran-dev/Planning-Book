@@ -10,18 +10,22 @@ namespace PlanningBook.Identity.Infrastructure
         public PBIdentityDbContext CreateDbContext(string[] args)
         {
             // Load configuration
-            //var configuration = new ConfigurationBuilder()
-            //    .SetBasePath(Directory.GetCurrentDirectory())
-            //    .AddJsonFile("appsettings.json")
-            //    .AddJsonFile("appsettings.Development.json", optional: true)
-            //    .AddEnvironmentVariables()
-            //    .Build();
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .AddJsonFile("appsettings.Development.json", optional: true)
+                .AddEnvironmentVariables()
+                .Build();
 
-            //// Use the same connection string key as in Startup.AddPBIdentityDbContext
-            //var connectionString = args[0] ?? configuration[$"{DBEngineConstants.RootConnectionString}:Identity{DBEngineConstants.dbConnectionStringPrefix}"];
+            // Use the same connection string key as in Startup.AddPBIdentityDbContext
+            var configurationPath = $"{DBEngineConstants.RootConnectionString}:Identity{DBEngineConstants.dbConnectionStringPrefix}";
+            var connectionString = (args != null && args.Length > 0 && !string.IsNullOrEmpty(args[0]))
+                            ? args[0]
+                            : configuration[configurationPath];
 
             var optionsBuilder = new DbContextOptionsBuilder<PBIdentityDbContext>();
-            optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=PlanningBookIdentity;User Id=sa;Password=ThienHoa0096@@;TrustServerCertificate=True;");
+            //optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=PlanningBookIdentity;User Id=sa;Password=ThienHoa0096@@;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer(connectionString);
             return new PBIdentityDbContext(optionsBuilder.Options);
         }
     }

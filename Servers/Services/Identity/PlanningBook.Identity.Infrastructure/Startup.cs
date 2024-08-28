@@ -10,7 +10,8 @@ namespace PlanningBook.Identity.Infrastructure
         public static void AddPBIdentityDbContext(this IServiceCollection services, IConfiguration configuration)
         {
             //TODO-Improve: Use DBEngine in BuildingBlock for add db connection
-            services.AddDbContext<PBIdentityDbContext>(options => options.UseSqlServer(configuration[$"{DBEngineConstants.RootConnectionString}:Identity{DBEngineConstants.dbConnectionStringPrefix}"]));
+            var test = $"{DBEngineConstants.RootConnectionString}:Identity{DBEngineConstants.dbConnectionStringPrefix}";
+            services.AddDbContext<PBIdentityDbContext>(options => options.UseSqlServer(configuration[test]));
         }
     }
 }
