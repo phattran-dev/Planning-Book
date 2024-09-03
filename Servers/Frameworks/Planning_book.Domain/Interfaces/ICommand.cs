@@ -2,5 +2,6 @@
 {
     public interface ICommand<TResult>
     {
+        public ValidationResult GetValidationResult();
     }
 }

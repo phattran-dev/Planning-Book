@@ -1,3 +1,4 @@
+using PlanningBook.Identity.API.Extensions;
 using PlanningBook.Identity.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,8 @@ builder.Services.AddSwaggerGen();
 
 #region DbContexts
 builder.Services.AddPBIdentityDbContext(configuration);
+    //.RegistryCommandQueryExecutor(configuration)
+    //.RegistryAccountModule(configuration);
 #endregion DbContexts
 
 var app = builder.Build();

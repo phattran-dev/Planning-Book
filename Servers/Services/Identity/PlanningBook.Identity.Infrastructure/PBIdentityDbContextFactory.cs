@@ -24,7 +24,6 @@ namespace PlanningBook.Identity.Infrastructure
                             : configuration[configurationPath];
 
             var optionsBuilder = new DbContextOptionsBuilder<PBIdentityDbContext>();
-            //optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=PlanningBookIdentity;User Id=sa;Password=ThienHoa0096@@;TrustServerCertificate=True;");
             optionsBuilder.UseSqlServer(connectionString);
             return new PBIdentityDbContext(optionsBuilder.Options);
         }

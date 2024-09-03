@@ -2,7 +2,7 @@
 {
     public interface IAuthorAudited<TPrimaryKey>
     {
-        TPrimaryKey? CreatedById { get; set; }
-        TPrimaryKey? UpdatedById { get; set; }
+        TPrimaryKey? CreatedBy { get; set; }
+        TPrimaryKey? UpdatedBy { get; set; }
     }
 }

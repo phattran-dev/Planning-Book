@@ -27,17 +27,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanningBook.Identity.API",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanningBook.Identity.Application", "Services\Identity\PlanningBook.Identity.Application\PlanningBook.Identity.Application.csproj", "{F931949D-4213-4AD9-9740-C3BFE3C13C0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanningBook.Identity.Infrastructure", "Services\Identity\PlanningBook.Identity.Infrastructure\PlanningBook.Identity.Infrastructure.csproj", "{482612B1-114A-4FFE-91DD-3B78CEB529E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanningBook.Identity.Infrastructure", "Services\Identity\PlanningBook.Identity.Infrastructure\PlanningBook.Identity.Infrastructure.csproj", "{482612B1-114A-4FFE-91DD-3B78CEB529E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanningBook.DBEngine", "BuildingBlocks\Presitance\PlanningBook.DBEngine\PlanningBook.DBEngine.csproj", "{474F19C7-8147-4140-A487-3A714BC40959}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanningBook.DBEngine", "BuildingBlocks\Presitance\PlanningBook.DBEngine\PlanningBook.DBEngine.csproj", "{474F19C7-8147-4140-A487-3A714BC40959}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{E2E9D153-A0DA-401F-BD83-B0A084277755}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanningBook.Users.Application", "Services\Users\PlanningBook.Users.Application\PlanningBook.Users.Application.csproj", "{6A33BD29-DDE3-4802-9887-18971E4613F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanningBook.Users.Application", "Services\Users\PlanningBook.Users.Application\PlanningBook.Users.Application.csproj", "{6A33BD29-DDE3-4802-9887-18971E4613F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanningBook.Users.Infrastructure", "Services\Users\PlanningBook.Users.Infrastructure\PlanningBook.Users.Infrastructure.csproj", "{4D535B8D-06FF-43AA-BB2D-F453EF23F55F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanningBook.Users.Infrastructure", "Services\Users\PlanningBook.Users.Infrastructure\PlanningBook.Users.Infrastructure.csproj", "{4D535B8D-06FF-43AA-BB2D-F453EF23F55F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanningBook.Users.API", "Services\Users\PlanningBook.Users.API\PlanningBook.Users.API.csproj", "{774B915B-705D-4894-BD2E-57166272DA1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanningBook.Users.API", "Services\Users\PlanningBook.Users.API\PlanningBook.Users.API.csproj", "{774B915B-705D-4894-BD2E-57166272DA1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanningBook.Constants", "PlanningBook.Constants\PlanningBook.Constants.csproj", "{E83266B4-211A-464E-B377-F8722ED61649}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +91,10 @@ Global
 		{774B915B-705D-4894-BD2E-57166272DA1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{774B915B-705D-4894-BD2E-57166272DA1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{774B915B-705D-4894-BD2E-57166272DA1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E83266B4-211A-464E-B377-F8722ED61649}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E83266B4-211A-464E-B377-F8722ED61649}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E83266B4-211A-464E-B377-F8722ED61649}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E83266B4-211A-464E-B377-F8722ED61649}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +115,7 @@ Global
 		{6A33BD29-DDE3-4802-9887-18971E4613F4} = {E2E9D153-A0DA-401F-BD83-B0A084277755}
 		{4D535B8D-06FF-43AA-BB2D-F453EF23F55F} = {E2E9D153-A0DA-401F-BD83-B0A084277755}
 		{774B915B-705D-4894-BD2E-57166272DA1E} = {E2E9D153-A0DA-401F-BD83-B0A084277755}
+		{E83266B4-211A-464E-B377-F8722ED61649} = {703AD3BC-82D1-4758-8584-FB73DD5A7993}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {691967B8-AD92-4E45-AFF4-282A1C53BF8B}

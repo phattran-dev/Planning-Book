@@ -1,6 +1,7 @@
 ﻿using PlanningBook.Domain;
 using PlanningBook.Domain.Interfaces;
-using PlanningBook.Identity.Application.Commands.Accounts;
+using PlanningBook.Identity.Application.Accounts.Commands;
+
 
 namespace PlanningBook.Identity.API.Extensions
 {
@@ -15,7 +16,7 @@ namespace PlanningBook.Identity.API.Extensions
 
         public static IServiceCollection RegistryAccountModule(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<ICommandHandler<CreateAccountByUserNameCommand, Guid>, CreateAccountByUserNameCommandHandler>();
+            services.AddScoped<ICommandHandler<RegisterClientAccountCommand, Guid?>, RegisterClientAccountCommandHandler>();
 
             return services;
         }

@@ -7,8 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Accounts\CommandResults\" />
-    <Folder Include="Queries\Accounts\" />
+    <Compile Remove="Commands\**" />
+    <Compile Remove="Queries\**" />
+    <EmbeddedResource Remove="Commands\**" />
+    <EmbeddedResource Remove="Queries\**" />
+    <None Remove="Commands\**" />
+    <None Remove="Queries\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientAccounts\Commands\CommandResults\" />
+    <Folder Include="ClientAccounts\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
