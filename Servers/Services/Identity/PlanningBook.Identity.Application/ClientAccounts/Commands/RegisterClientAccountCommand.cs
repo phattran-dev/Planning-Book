@@ -48,12 +48,10 @@ namespace PlanningBook.Identity.Application.Accounts.Commands
     #region Command Handler
     public sealed class RegisterClientAccountCommandHandler : ICommandHandler<RegisterClientAccountCommand, Guid?>
     {
-        private readonly PBIdentityDbContext _identityDbContext;
         private readonly UserManager<Account> _accountManager;
 
-        public RegisterClientAccountCommandHandler(PBIdentityDbContext identityDbContext, UserManager<Account> accountManager)
+        public RegisterClientAccountCommandHandler(UserManager<Account> accountManager)
         {
-            _identityDbContext = identityDbContext;
             _accountManager = accountManager;
         }
 
