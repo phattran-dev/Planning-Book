@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using PlanningBook.Identity.API.Extensions;
 using PlanningBook.Identity.Infrastructure;
+using PlanningBook.Identity.Infrastructure.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -7,15 +9,39 @@ var configuration = builder.Configuration;
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+#region Add Swagger
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+#endregion Add Swagger
 
-#region DbContexts
+#region Add DbContexts
 builder.Services.AddPBIdentityDbContext(configuration);
-    //.RegistryCommandQueryExecutor(configuration)
-    //.RegistryAccountModule(configuration);
-#endregion DbContexts
+//.RegistryCommandQueryExecutor(configuration)
+//.RegistryAccountModule(configuration);
+#endregion Add DbContexts
+
+#region Add Services
+builder.Services
+    .RegistryCommandQueryExecutor(configuration)
+    .RegistryAccountModule(configuration);
+#endregion Add Services
+
+#region Add Identity
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication()
+    .AddBearerToken(IdentityConstants.BearerScheme);
+
+//builder.Services.AddIdentityCore<Account>(options =>
+//    {
+//        options.SignIn.RequireConfirmedEmail = true;
+//    })
+    builder.Services.AddIdentityCore<Account>()
+    .AddEntityFrameworkStores<PBIdentityDbContext>()
+    .AddApiEndpoints();
+#endregion Add Identity
+
 
 var app = builder.Build();
 
@@ -27,6 +53,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Auto generate API for authen
+//app.MapIdentityApi<Account>();
 
 app.UseAuthorization();
 
