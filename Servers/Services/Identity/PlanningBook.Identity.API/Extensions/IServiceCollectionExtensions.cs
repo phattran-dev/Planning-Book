@@ -16,7 +16,7 @@ namespace PlanningBook.Identity.API.Extensions
 
         public static IServiceCollection RegistryAccountModule(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<ICommandHandler<RegisterClientAccountCommand, Guid?>, RegisterClientAccountCommandHandler>();
+            //services.AddScoped<ICommandHandler<SignUpClientAccountCommand, Guid>, SignUpClientAccountCommandHandler>();
 
             return services;
         }

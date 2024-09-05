@@ -3,16 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using PlanningBook.Domain;
 using PlanningBook.Domain.Interfaces;
 using PlanningBook.Identity.Infrastructure.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanningBook.Identity.Application.ClientAccounts.Commands
 {
     #region Command Model
-    public sealed class ChangePasswordClientAccountCommand : ICommand<bool>
+    public sealed class ChangePasswordClientAccountCommand : ICommand<CommandResult<bool>>
     {
         public Guid? UserId { get; set; }
         public string OldPassword { get; set; }
@@ -50,7 +45,7 @@ namespace PlanningBook.Identity.Application.ClientAccounts.Commands
     #endregion Command Model
 
     #region Command Handler
-    public sealed class ChangePasswordClientAccountCommandHandler : ICommandHandler<ChangePasswordClientAccountCommand, bool>
+    public sealed class ChangePasswordClientAccountCommandHandler : ICommandHandler<ChangePasswordClientAccountCommand, CommandResult<bool>>
     {
         private readonly UserManager<Account> _userManager;
 
@@ -59,11 +54,11 @@ namespace PlanningBook.Identity.Application.ClientAccounts.Commands
             _userManager = userManager;
         }
 
-        public async Task<bool> HandleAsync(ChangePasswordClientAccountCommand command, CancellationToken cancellationToken = default)
+        public async Task<CommandResult<bool>> HandleAsync(ChangePasswordClientAccountCommand command, CancellationToken cancellationToken = default)
         {
             if (command == null || !command.GetValidationResult().IsValid)
                 // TODO: Log Error
-                return false;
+                return CommandResult<bool>.Failure(null, null);
 
             var userExisted = await _userManager.Users
                     .FirstOrDefaultAsync(account => account.Id == command.UserId &&
@@ -71,11 +66,11 @@ namespace PlanningBook.Identity.Application.ClientAccounts.Commands
                         !account.IsDeleted, cancellationToken);
 
             if (userExisted == null)
-                return false;
+                return CommandResult<bool>.Failure(null, null);
 
             var result = await _userManager.ChangePasswordAsync(userExisted, command.OldPassword, command.NewPassword);
 
-            return result.Succeeded;
+            return CommandResult<bool>.Success(result.Succeeded);
         }
     }
     #endregion Command Handler

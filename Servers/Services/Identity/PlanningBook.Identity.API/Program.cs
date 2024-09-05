@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using PlanningBook.Identity.API.Extensions;
 using PlanningBook.Identity.Infrastructure;
 using PlanningBook.Identity.Infrastructure.Entities;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -30,7 +32,10 @@ builder.Services
 
 #region Add Identity
 builder.Services.AddAuthorization();
-builder.Services.AddAuthentication()
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(o =>
+    {
+    })
     .AddBearerToken(IdentityConstants.BearerScheme);
 
 //builder.Services.AddIdentityCore<Account>(options =>

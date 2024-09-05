@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore;
 namespace PlanningBook.Identity.Application.Accounts.Commands
 {
     #region Command Model
-    public sealed class RegisterClientAccountCommand : ICommand<Guid?>
+    public sealed class SignUpClientAccountCommand : ICommand<CommandResult<Guid>>
     {
         public string Username { get; set; }
         public string Password { get; set; } // TO DO: Should not plain text from FE -> BE
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
-        public RegisterClientAccountCommand(string username, string password, string? email, string? phoneNumber)
+        public SignUpClientAccountCommand(string username, string password, string? email, string? phoneNumber)
         {
             Username = username;
             Password = password;
@@ -46,22 +46,22 @@ namespace PlanningBook.Identity.Application.Accounts.Commands
     #endregion Command Model
 
     #region Command Handler
-    public sealed class RegisterClientAccountCommandHandler : ICommandHandler<RegisterClientAccountCommand, Guid?>
+    public sealed class SignUpClientAccountCommandHandler : ICommandHandler<SignUpClientAccountCommand, CommandResult<Guid>>
     {
         private readonly UserManager<Account> _accountManager;
 
-        public RegisterClientAccountCommandHandler(UserManager<Account> accountManager)
+        public SignUpClientAccountCommandHandler(UserManager<Account> accountManager)
         {
             _accountManager = accountManager;
         }
 
-        public async Task<Guid?> HandleAsync(RegisterClientAccountCommand command, CancellationToken cancellationToken = default)
+        public async Task<CommandResult<Guid>> HandleAsync(SignUpClientAccountCommand command, CancellationToken cancellationToken = default)
         {
             if (command == null || !command.GetValidationResult().IsValid)
             {
                 // TODO: Log Error
                 // TODO: Handle throw error with error message
-                return null;
+                return CommandResult<Guid>.Failure(null, null);
             }
 
             //var accountExisted = await _accountManager.FindByEmailAsync(command.Email);
@@ -78,7 +78,7 @@ namespace PlanningBook.Identity.Application.Accounts.Commands
                 if (isEmailUsed)
                 {
                     // TODO: Log Error & Return Error
-                    return null;
+                    return CommandResult<Guid>.Failure(null, null);
                 }
             }
 
@@ -92,7 +92,7 @@ namespace PlanningBook.Identity.Application.Accounts.Commands
                 if (isPhoneUsed)
                 {
                     // TODO: Log Error & Return Error
-                    return null;
+                    return CommandResult<Guid>.Failure(null, null);
                 }
             }
 
@@ -110,7 +110,7 @@ namespace PlanningBook.Identity.Application.Accounts.Commands
                 // Example User craete an account username/password with email A
                 // After that the login by Gmail with same email A
                 // => Ask to login by username/passwork and link Gmail in account setting
-                return null;
+                return CommandResult<Guid>.Failure(null, null);
             }
 
             var account = new Account()
@@ -123,12 +123,12 @@ namespace PlanningBook.Identity.Application.Accounts.Commands
             // Need Add salt & perper for Password
             var result = await _accountManager.CreateAsync(account, command.Password);
             if (!result.Succeeded)
-                return null;
+                return CommandResult<Guid>.Failure(null, null);
 
             // TODO: Send Confirmed email & sms
             // TODO: Send to Person Service API to create Person record
 
-            return account.Id;
+            return CommandResult<Guid>.Success(account.Id);
         }
     }
     #endregion Command Handler
