@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using PlanningBook.Domain.Interfaces;
 using PlanningBook.Identity.Infrastructure.Entities;
-using PlanningBook.Identity.Infrastructure;
 using PlanningBook.Domain;
 using Microsoft.EntityFrameworkCore;
+using PlanningBook.Identity.Application.Helpers.Interfaces;
 
 namespace PlanningBook.Identity.Application.Accounts.Commands
 {
@@ -26,35 +26,23 @@ namespace PlanningBook.Identity.Application.Accounts.Commands
         {
             var invalid = string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password);
             if (invalid)
-            {
-                return new ValidationResult()
-                {
-                    IsValid = false,
-                    Messages = new List<string>()
+                return ValidationResult.Failure(null, new List<string>()
                     {
                         "Register Account Failed: Invalid request!"
-                    }
-                };
-            }
+                    });
 
-            return new ValidationResult()
-            {
-                IsValid = true
-            };
+            return ValidationResult.Success();
         }
     }
     #endregion Command Model
 
     #region Command Handler
-    public sealed class SignUpClientAccountCommandHandler : ICommandHandler<SignUpClientAccountCommand, CommandResult<Guid>>
+    public sealed class SignUpClientAccountCommandHandler(
+        UserManager<Account> _accountManager,
+        IPasswordHasher _passwordHasher
+        )
+        : ICommandHandler<SignUpClientAccountCommand, CommandResult<Guid>>
     {
-        private readonly UserManager<Account> _accountManager;
-
-        public SignUpClientAccountCommandHandler(UserManager<Account> accountManager)
-        {
-            _accountManager = accountManager;
-        }
-
         public async Task<CommandResult<Guid>> HandleAsync(SignUpClientAccountCommand command, CancellationToken cancellationToken = default)
         {
             if (command == null || !command.GetValidationResult().IsValid)
@@ -113,21 +101,29 @@ namespace PlanningBook.Identity.Application.Accounts.Commands
                 return CommandResult<Guid>.Failure(null, null);
             }
 
+            var passwordHash = _passwordHasher.Hash(command.Password);
             var account = new Account()
             {
                 UserName = command.Username,
+                NormalizedUserName = command.Username.ToUpper(),
                 Email = command.Email,
-                PhoneNumber = command.PhoneNumber,
+                NormalizedEmail = command?.Email?.ToUpper(),
+                PhoneNumber = command?.PhoneNumber,
+                PasswordHash = passwordHash,
+                IsDeleted = false,
+                IsActive = true
             };
 
-            // Need Add salt & perper for Password
-            var result = await _accountManager.CreateAsync(account, command.Password);
+            var result = await _accountManager.CreateAsync(account);
             if (!result.Succeeded)
-                return CommandResult<Guid>.Failure(null, null);
+            {
+                return CommandResult<Guid>.Failure(null, result.Errors.ToString());
+            }
 
             // TODO: Send Confirmed email & sms
             // TODO: Send to Person Service API to create Person record
-
+            account.PasswordHash = passwordHash;
+            await _accountManager.UpdateAsync(account);
             return CommandResult<Guid>.Success(account.Id);
         }
     }

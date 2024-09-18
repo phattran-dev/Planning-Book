@@ -27,33 +27,17 @@ namespace PlanningBook.Identity.Application.ClientAccounts.Commands
                 UserId == null;
 
             if (invalid)
-                return new ValidationResult()
-                {
-                    IsValid = false,
-                    Messages = new List<string>()
-                    {
-                        "Changes Password Failed!"
-                    }
-                };
+                return ValidationResult.Failure(null, new List<string>() { "Changes Password Failed!" });
 
-            return new ValidationResult()
-            {
-                IsValid = true
-            };
+            return ValidationResult.Success();
         }
     }
     #endregion Command Model
 
     #region Command Handler
-    public sealed class ChangePasswordClientAccountCommandHandler : ICommandHandler<ChangePasswordClientAccountCommand, CommandResult<bool>>
+    public sealed class ChangePasswordClientAccountCommandHandler(UserManager<Account> _userManager)
+        : ICommandHandler<ChangePasswordClientAccountCommand, CommandResult<bool>>
     {
-        private readonly UserManager<Account> _userManager;
-
-        public ChangePasswordClientAccountCommandHandler(UserManager<Account> userManager)
-        {
-            _userManager = userManager;
-        }
-
         public async Task<CommandResult<bool>> HandleAsync(ChangePasswordClientAccountCommand command, CancellationToken cancellationToken = default)
         {
             if (command == null || !command.GetValidationResult().IsValid)

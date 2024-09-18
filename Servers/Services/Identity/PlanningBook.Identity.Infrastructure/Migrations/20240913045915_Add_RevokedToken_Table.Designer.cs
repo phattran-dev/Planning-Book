@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlanningBook.Identity.Infrastructure;
 
@@ -11,9 +12,11 @@ using PlanningBook.Identity.Infrastructure;
 namespace PlanningBook.Identity.Infrastructure.Migrations
 {
     [DbContext(typeof(PBIdentityDbContext))]
-    partial class PBIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240913045915_Add_RevokedToken_Table")]
+    partial class Add_RevokedToken_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,6 +46,9 @@ namespace PlanningBook.Identity.Infrastructure.Migrations
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)

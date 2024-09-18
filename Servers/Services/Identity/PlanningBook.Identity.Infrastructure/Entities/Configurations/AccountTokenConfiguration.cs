@@ -13,6 +13,10 @@ namespace PlanningBook.Identity.Infrastructure.Entities.Configurations
             builder.Property(p => p.UserId)
                 .HasColumnName(nameof(AccountToken.AccountId));
             builder.Ignore(p => p.AccountId);
+
+            builder.Property(p => p.Value)
+                .HasColumnName(nameof(AccountToken.Token));
+            builder.Ignore(p => p.Token);
         }
     }
 }

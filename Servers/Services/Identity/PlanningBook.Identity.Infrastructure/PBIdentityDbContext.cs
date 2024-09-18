@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PlanningBook.DBEngine;
 using PlanningBook.Identity.Infrastructure.Entities;
 using PlanningBook.Identity.Infrastructure.Entities.Configurations;
+using System.Reflection;
 
 namespace PlanningBook.Identity.Infrastructure
 {
@@ -14,15 +15,16 @@ namespace PlanningBook.Identity.Infrastructure
         {
             base.OnModelCreating(builder);
 
-            builder.ApplyConfiguration(new AccountConfiguration());
-            builder.ApplyConfiguration(new RoleConfiguration());
-            builder.ApplyConfiguration(new AccountClaimConfiguration());
-            builder.ApplyConfiguration(new AccountRoleConfiguration());
-            builder.ApplyConfiguration(new AccountLoginConfiguration());
-            builder.ApplyConfiguration(new RoleClaimConfiguration());
-            builder.ApplyConfiguration(new AccountTokenConfiguration());
+            //builder.ApplyConfiguration(new AccountConfiguration());
+            //builder.ApplyConfiguration(new RoleConfiguration());
+            //builder.ApplyConfiguration(new AccountClaimConfiguration());
+            //builder.ApplyConfiguration(new AccountRoleConfiguration());
+            //builder.ApplyConfiguration(new AccountLoginConfiguration());
+            //builder.ApplyConfiguration(new RoleClaimConfiguration());
+            //builder.ApplyConfiguration(new AccountTokenConfiguration());
+            //builder.ApplyConfiguration(new RevokedTokenConfiguration());
 
-            builder.ApplyConfigurationsFromAssembly(typeof(BaseRelationDbEntityTypeConfiguration<>).Assembly);
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }

@@ -34,7 +34,7 @@ namespace PlanningBook.Domain
             }
 
             //_logger.LogTrace($"[Query Executor] [{handler.GetType().Name}] {JsonConvert.SerializeObject(query)}");
-            return handler.Handle((dynamic)query);
+            return handler.HandleAsync((dynamic)query);
         }
     }
 }

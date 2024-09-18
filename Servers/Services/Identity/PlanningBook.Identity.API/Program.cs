@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using PlanningBook.Identity.API.Extensions;
 using PlanningBook.Identity.Infrastructure;
 using PlanningBook.Identity.Infrastructure.Entities;
-using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -20,12 +21,11 @@ builder.Services.AddSwaggerGen();
 
 #region Add DbContexts
 builder.Services.AddPBIdentityDbContext(configuration);
-//.RegistryCommandQueryExecutor(configuration)
-//.RegistryAccountModule(configuration);
 #endregion Add DbContexts
 
 #region Add Services
 builder.Services
+    .AddServices()
     .RegistryCommandQueryExecutor(configuration)
     .RegistryAccountModule(configuration);
 #endregion Add Services
@@ -35,6 +35,13 @@ builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(o =>
     {
+        o.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"])),
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.Zero
+        };
     })
     .AddBearerToken(IdentityConstants.BearerScheme);
 
@@ -42,9 +49,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 //    {
 //        options.SignIn.RequireConfirmedEmail = true;
 //    })
-    builder.Services.AddIdentityCore<Account>()
-    .AddEntityFrameworkStores<PBIdentityDbContext>()
-    .AddApiEndpoints();
+builder.Services.AddIdentityCore<Account>()
+.AddEntityFrameworkStores<PBIdentityDbContext>()
+.AddApiEndpoints();
 #endregion Add Identity
 
 

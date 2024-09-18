@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace PlanningBook.DBEngine
 {
-    public interface IBaseEntityTypeConfiguration<TEntity>
+    public interface IBaseEntityTypeConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
          where TEntity : class
     {
-        void Configure(EntityTypeBuilder<TEntity> builder);
+        //void Configure(EntityTypeBuilder<TEntity> builder);
     }
 }

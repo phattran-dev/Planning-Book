@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Frameworks\PlanningBook.Extensions\PlanningBook.Extensions.csproj" />
     <ProjectReference Include="..\PlanningBook.Identity.Application\PlanningBook.Identity.Application.csproj" />
     <ProjectReference Include="..\PlanningBook.Identity.Infrastructure\PlanningBook.Identity.Infrastructure.csproj" />
   </ItemGroup>

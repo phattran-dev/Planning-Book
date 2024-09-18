@@ -37,7 +37,7 @@ namespace PlanningBook.Domain
 
             //TODO: Implement Logger
             //_logger.LogTrace($"[Command Executor] [{handler.GetType().Name}] {JsonConvert.SerializeObject(command)}");
-            return ((dynamic)handler).Handle((dynamic)command);
+            return ((dynamic)handler).HandleAsync((dynamic)command);
         }
     }
 }

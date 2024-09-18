@@ -1,9 +1,8 @@
 ﻿namespace PlanningBook.Domain.Interfaces
 {
-    public interface ISoftDeleted<TAuthorKey>
+    public interface ISoftDeleted
     {
         public bool IsDeleted { get; set; }
-        public TAuthorKey? DeletedBy { get; set; }
         public DateTime? DeletedAt { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlanningBook.Identity.Infrastructure;
 
@@ -11,9 +12,11 @@ using PlanningBook.Identity.Infrastructure;
 namespace PlanningBook.Identity.Infrastructure.Migrations
 {
     [DbContext(typeof(PBIdentityDbContext))]
-    partial class PBIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240918144428_Remove_DeletedBy_Column_For_All_Table")]
+    partial class Remove_DeletedBy_Column_For_All_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
