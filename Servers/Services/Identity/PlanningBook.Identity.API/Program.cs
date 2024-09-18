@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using PlanningBook.Identity.API.Extensions;
 using PlanningBook.Identity.Infrastructure;
 using PlanningBook.Identity.Infrastructure.Entities;
@@ -16,7 +17,18 @@ builder.Services.AddControllers();
 #region Add Swagger
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Enter 'Bearer' followed by a space and the JWT token in the text box below.\nExample: 'Bearer 12345abcdef'",
+    });
+});
 #endregion Add Swagger
 
 #region Add DbContexts
@@ -42,8 +54,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateLifetime = true,
             ClockSkew = TimeSpan.Zero
         };
-    })
-    .AddBearerToken(IdentityConstants.BearerScheme);
+    });
+    //.AddBearerToken(IdentityConstants.BearerScheme);
 
 //builder.Services.AddIdentityCore<Account>(options =>
 //    {

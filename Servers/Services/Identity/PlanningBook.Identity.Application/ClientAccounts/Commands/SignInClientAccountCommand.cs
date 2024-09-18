@@ -72,21 +72,22 @@ namespace PlanningBook.Identity.Application.ClientAccounts.Commands
             //await _accountTokenRepository.HardDeleteAsync(x => x.AccountId == accountExisted.Id, cancellationToken);
 
             var configExpirationDays = _configuration.GetValue<int>("Jwt:RefreshTokenExpirationInDays", 7);
-            var newToken = new AccountToken()
-            {
-                Name = $"{accountExisted.Id}-{DateTime.UtcNow.ToString()}",
-                AccountId = accountExisted.Id,
-                // TODO: Need some constant for LoginProvider
-                LoginProvider = "InternalIdentitySystem",
-                Token = token,
-                RefreshToken = refreshToken,
-                RefreshTokenExpirationDate = DateTime.UtcNow.AddDays(configExpirationDays),
-                IsRevoked = false
-            };
-            await _accountTokenRepository.AddAsync(newToken, cancellationToken);
+            // TODO: Need To Fix later
+            //var newToken = new AccountToken()
+            //{
+            //    Name = $"{accountExisted.Id}-{DateTime.UtcNow.ToString()}",
+            //    AccountId = accountExisted.Id,
+            //    // TODO: Need some constant for LoginProvider
+            //    LoginProvider = "InternalIdentitySystem",
+            //    Token = token,
+            //    RefreshToken = refreshToken,
+            //    RefreshTokenExpirationDate = DateTime.UtcNow.AddDays(configExpirationDays),
+            //    IsRevoked = false
+            //};
+            //await _accountTokenRepository.AddAsync(newToken, cancellationToken);
 
-            // TODO: Should re-implement unitOfWork for case save change many different tables
-            await _accountTokenRepository.SaveChangeAsync();
+            //// TODO: Should re-implement unitOfWork for case save change many different tables
+            //await _accountTokenRepository.SaveChangeAsync();
 
             return CommandResult<SignInClientAccountCommandResult>.Success(new SignInClientAccountCommandResult()
             {
