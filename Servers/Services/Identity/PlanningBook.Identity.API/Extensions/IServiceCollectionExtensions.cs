@@ -24,6 +24,7 @@ namespace PlanningBook.Identity.API.Extensions
             services.AddScoped(typeof(IEFRepository<,,>), typeof(EFRepository<,,>));
             services.AddScoped(typeof(IEFRepository<,,,>), typeof(EFRepository<,,,>));
             services.AddScoped(typeof(IEFClassRepository<,,>), typeof(EFClassRepository<,,>));
+            services.AddScoped(typeof(IEFClassRepository<,,,>), typeof(EFClassRepository<,,,>));
             #endregion Add Repositories
 
             return services;

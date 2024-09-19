@@ -61,9 +61,10 @@ namespace PlanningBook.Identity.Application.ClientAccounts.Commands
             if (!validPassword)
                 return CommandResult<SignInClientAccountCommandResult>.Failure(null, null);
 
-            //var signInResult = await _signInManager.PasswordSignInAsync(accountExisted, accountExisted.PasswordHash, true, false);
-            //if (!signInResult.Succeeded)
-            //    return CommandResult<string>.Failure(null, null);
+           //await _signInManager.SignInAsync(accountExisted, true);
+            //var signInResult = await _signInManager.PasswordSignInAsync(command.UserName, accountExisted.PasswordHash, true, false);
+            //if (!signInResult)
+            //    return CommandResult<SignInClientAccountCommandResult>.Failure(null, null);
 
             var token = _tokenProvider.GenerateToken(accountExisted);
             var refreshToken = _tokenProvider.GenerateRefreshToken();

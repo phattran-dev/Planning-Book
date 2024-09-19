@@ -10,7 +10,7 @@ using PlanningBook.Identity.Application.ClientAccounts.Commands.CommandResults;
 namespace PlanningBook.Identity.API.Controllers
 {
     [ApiController]
-    [Route("idenity")]
+    [Route("identity")]
     public class ClientAccountsController : ControllerBase
     {
         private readonly IQueryExecutor _queryExecutor;

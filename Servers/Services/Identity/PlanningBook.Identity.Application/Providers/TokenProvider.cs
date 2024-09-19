@@ -1,10 +1,9 @@
-﻿using System.Security.Claims;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
-using PlanningBook.Contants;
 using PlanningBook.Identity.Application.Providers.Interfaces;
 using PlanningBook.Identity.Infrastructure.Entities;
 
@@ -31,30 +30,25 @@ namespace PlanningBook.Identity.Application.Providers
 
         public string GenerateToken(Account account)
         {
-            string secretKey = _configuration["Jwt:Secret"]!;
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+            string secretKey = _configuration.GetValue<string>("Jwt:Secret");
+            string issuer = _configuration.GetValue<string>("Jwt:Issuer");
+            string audience = _configuration.GetValue<string>("Jwt:Audience");
+            int expirationInMinutes = _configuration.GetValue<int>("Jwt:ExpirationInMinutes");
 
+            if (string.IsNullOrWhiteSpace(secretKey) || string.IsNullOrWhiteSpace(issuer) || string.IsNullOrWhiteSpace(audience))
+                return string.Empty;
+
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(
-                [
-                    new Claim(ClaimTypes.NameIdentifier, account.Id.ToString()),
-                    //new Claim(JwtRegisteredClaimNames.PhoneNumber, account.PhoneNumber.ToString())
-                ]),
-                // Note: configurateion.GetValue<> from .net core 8 need to install Microsoft.Extensions.Configuration.Binder
-                Expires = DateTime.UtcNow.AddMinutes(_configuration.GetValue<int>("Jwt:ExpirationInMinutes")),
-                SigningCredentials = credentials,
-                Issuer = _configuration["Jwt:Issuer"],
-                Audience = _configuration["Jwt:Audience"]
+            var claims = new List<Claim>() {
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.NameIdentifier, account.Id.ToString())
             };
 
-            var handler = new JsonWebTokenHandler();
+            var token = new JwtSecurityToken(issuer, audience, claims, expires: DateTime.UtcNow.AddMinutes(1800), signingCredentials: credentials);
 
-            string token = handler.CreateToken(tokenDescriptor);
-
-            return token;
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }
