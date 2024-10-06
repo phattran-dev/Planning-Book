@@ -17,7 +17,7 @@ namespace PlanningBook.Identity.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -117,6 +117,9 @@ namespace PlanningBook.Identity.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
 
@@ -129,9 +132,15 @@ namespace PlanningBook.Identity.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AccountId");
+
                     b.HasIndex("UserId");
 
-                    b.ToTable("AccountClaims", (string)null);
+                    b.ToTable("AccountClaims", null, t =>
+                        {
+                            t.Property("AccountId")
+                                .HasColumnName("AccountId1");
+                        });
                 });
 
             modelBuilder.Entity("PlanningBook.Identity.Infrastructure.Entities.AccountLogin", b =>
@@ -142,6 +151,9 @@ namespace PlanningBook.Identity.Infrastructure.Migrations
                     b.Property<string>("ProviderKey")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
@@ -151,9 +163,34 @@ namespace PlanningBook.Identity.Infrastructure.Migrations
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
+                    b.HasIndex("AccountId");
+
                     b.HasIndex("UserId");
 
-                    b.ToTable("AccountLogins", (string)null);
+                    b.ToTable("AccountLogins", null, t =>
+                        {
+                            t.Property("AccountId")
+                                .HasColumnName("AccountId1");
+                        });
+                });
+
+            modelBuilder.Entity("PlanningBook.Identity.Infrastructure.Entities.AccountPerson", b =>
+                {
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PersonId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("AccountId", "PersonId");
+
+                    b.ToTable("AccountPersons", (string)null);
                 });
 
             modelBuilder.Entity("PlanningBook.Identity.Infrastructure.Entities.AccountRole", b =>
@@ -165,11 +202,20 @@ namespace PlanningBook.Identity.Infrastructure.Migrations
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("AccountId");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AccountRoles", (string)null);
+                    b.ToTable("AccountRoles", null, t =>
+                        {
+                            t.Property("AccountId")
+                                .HasColumnName("AccountId1");
+                        });
                 });
 
             modelBuilder.Entity("PlanningBook.Identity.Infrastructure.Entities.AccountToken", b =>
@@ -183,6 +229,9 @@ namespace PlanningBook.Identity.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -206,7 +255,13 @@ namespace PlanningBook.Identity.Infrastructure.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AccountTokens", (string)null);
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("AccountTokens", null, t =>
+                        {
+                            t.Property("AccountId")
+                                .HasColumnName("AccountId1");
+                        });
                 });
 
             modelBuilder.Entity("PlanningBook.Identity.Infrastructure.Entities.RevokedToken", b =>
@@ -214,8 +269,14 @@ namespace PlanningBook.Identity.Infrastructure.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
@@ -319,24 +380,57 @@ namespace PlanningBook.Identity.Infrastructure.Migrations
 
             modelBuilder.Entity("PlanningBook.Identity.Infrastructure.Entities.AccountClaim", b =>
                 {
+                    b.HasOne("PlanningBook.Identity.Infrastructure.Entities.Account", "Account")
+                        .WithMany("Claims")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("PlanningBook.Identity.Infrastructure.Entities.Account", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Account");
                 });
 
             modelBuilder.Entity("PlanningBook.Identity.Infrastructure.Entities.AccountLogin", b =>
                 {
+                    b.HasOne("PlanningBook.Identity.Infrastructure.Entities.Account", "Account")
+                        .WithMany("Logins")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("PlanningBook.Identity.Infrastructure.Entities.Account", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Account");
+                });
+
+            modelBuilder.Entity("PlanningBook.Identity.Infrastructure.Entities.AccountPerson", b =>
+                {
+                    b.HasOne("PlanningBook.Identity.Infrastructure.Entities.Account", "Account")
+                        .WithMany("Persons")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Account");
                 });
 
             modelBuilder.Entity("PlanningBook.Identity.Infrastructure.Entities.AccountRole", b =>
                 {
+                    b.HasOne("PlanningBook.Identity.Infrastructure.Entities.Account", "Account")
+                        .WithMany("Roles")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("PlanningBook.Identity.Infrastructure.Entities.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
@@ -348,15 +442,25 @@ namespace PlanningBook.Identity.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Account");
                 });
 
             modelBuilder.Entity("PlanningBook.Identity.Infrastructure.Entities.AccountToken", b =>
                 {
+                    b.HasOne("PlanningBook.Identity.Infrastructure.Entities.Account", "Account")
+                        .WithMany("Tokens")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("PlanningBook.Identity.Infrastructure.Entities.Account", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Account");
                 });
 
             modelBuilder.Entity("PlanningBook.Identity.Infrastructure.Entities.RoleClaim", b =>
@@ -366,6 +470,19 @@ namespace PlanningBook.Identity.Infrastructure.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("PlanningBook.Identity.Infrastructure.Entities.Account", b =>
+                {
+                    b.Navigation("Claims");
+
+                    b.Navigation("Logins");
+
+                    b.Navigation("Persons");
+
+                    b.Navigation("Roles");
+
+                    b.Navigation("Tokens");
                 });
 #pragma warning restore 612, 618
         }

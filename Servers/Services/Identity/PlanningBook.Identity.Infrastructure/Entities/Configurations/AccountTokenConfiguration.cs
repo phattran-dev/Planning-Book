@@ -17,6 +17,11 @@ namespace PlanningBook.Identity.Infrastructure.Entities.Configurations
             builder.Property(p => p.Value)
                 .HasColumnName(nameof(AccountToken.Token));
             builder.Ignore(p => p.Token);
+
+            builder.HasOne(t => t.Account)
+                .WithMany(a => a.Tokens)
+                .HasForeignKey(t => t.AccountId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

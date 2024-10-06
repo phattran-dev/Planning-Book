@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PlanningBook.Users.API.Extensions;
+using PlanningBook.Users.Infrastructure;
 using System.Net;
 using System.Text;
 
@@ -13,11 +13,18 @@ var configuration = builder.Configuration;
 
 builder.Services.AddControllers();
 
-builder.Services
-.AddServices()
-    .RegistryCommandQueryExecutor(configuration)
-    .RegistryAccountModule(configuration);
+#region Add DContexts
+builder.Services.AddPBPersonDbContext(configuration);
+#endregion Add DbContexts
 
+#region Add Services
+builder.Services
+    .AddRepositories()
+    .RegistryCommandQueryExecutor(configuration)
+    .RegistryPersonModule(configuration);
+#endregion Add Services
+
+#region Add Authentication
 builder.Services.AddAuthentication(o =>
 {
     o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -41,7 +48,9 @@ builder.Services.AddAuthentication(o =>
         };
     });
 builder.Services.AddAuthorization();
+#endregion Add Authentication
 
+#region Add Swagger
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(
@@ -78,6 +87,7 @@ builder.Services.AddSwaggerGen(
         });
     }
 );
+#endregion Add Swagger
 
 var app = builder.Build();
 
@@ -101,8 +111,8 @@ app.Use(async (context, next) =>
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

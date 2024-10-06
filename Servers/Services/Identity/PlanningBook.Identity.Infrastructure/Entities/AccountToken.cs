@@ -6,7 +6,7 @@ namespace PlanningBook.Identity.Infrastructure.Entities
     public class AccountToken : IdentityUserToken<Guid>, IDateAudited
     {
         public Guid AccountId { get; set; }
-        //public virtual Account Account { get; set; }
+        public Account Account { get; set; }
         public string Token { get; set; }
         public string RefreshToken { get; set; }
         // TODO: Need Cron Job to check and make IsRevoked Refresh token

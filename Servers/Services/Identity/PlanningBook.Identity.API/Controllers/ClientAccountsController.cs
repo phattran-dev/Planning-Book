@@ -11,18 +11,12 @@ namespace PlanningBook.Identity.API.Controllers
 {
     [ApiController]
     [Route("identity")]
-    public class ClientAccountsController : ControllerBase
+    public class ClientAccountsController(
+        IQueryExecutor _queryExecutor,
+        ICommandExecutor _commandExecutor,
+        HttpClient _httpClient
+        ) : ControllerBase
     {
-        private readonly IQueryExecutor _queryExecutor;
-        private readonly ICommandExecutor _commandExecutor;
-
-        public ClientAccountsController(
-            IQueryExecutor queryExecutor,
-            ICommandExecutor commandExecutor)
-        {
-            _queryExecutor = queryExecutor;
-            _commandExecutor = commandExecutor;
-        }
 
         [AllowAnonymous]
         [HttpPost("SignUp")]
@@ -40,6 +34,7 @@ namespace PlanningBook.Identity.API.Controllers
         [HttpPost("SignIn")]
         public async Task<ActionResult<CommandResult<SignInClientAccountCommandResult>>> SignIn([FromBody] SignInClientAccountCommand command)
         {
+            
             var result = await _commandExecutor.ExecuteAsync(command);
 
             if (result.IsSuccess)
@@ -52,6 +47,7 @@ namespace PlanningBook.Identity.API.Controllers
         [HttpPost("SignOut")]
         public async Task<ActionResult<CommandResult<bool>>> SignOut()
         {
+            //var token = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             var command = new SignOutClientAccountCommand()
             {
                 AccountId = User.GetCurrentAccountId(),

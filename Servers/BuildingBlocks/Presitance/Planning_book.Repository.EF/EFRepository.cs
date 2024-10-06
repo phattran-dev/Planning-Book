@@ -28,13 +28,13 @@ namespace PlanningBook.Repository.EF
                 ((IDateAudited)entity).UpdatedDate = DateTime.UtcNow;
             }
 
-            if(entity is ISoftDeleted)
+            if (entity is ISoftDeleted)
             {
                 ((ISoftDeleted)entity).IsDeleted = false;
                 ((ISoftDeleted)entity).DeletedAt = null;
             }
 
-            if(entity is IActiveEntity)
+            if (entity is IActiveEntity)
             {
                 ((IActiveEntity)entity).IsActive = true;
             }
@@ -391,7 +391,15 @@ namespace PlanningBook.Repository.EF
 
         public async Task<int> SaveChangeAsync(CancellationToken cancellationToken = default)
         {
-            return await _dbContext.SaveChangesAsync(cancellationToken);
+            try
+            {
+                return await _dbContext.SaveChangesAsync(cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+
         }
 
         public async Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)

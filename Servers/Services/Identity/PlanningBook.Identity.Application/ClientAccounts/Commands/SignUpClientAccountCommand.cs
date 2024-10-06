@@ -4,6 +4,9 @@ using PlanningBook.Identity.Infrastructure.Entities;
 using PlanningBook.Domain;
 using Microsoft.EntityFrameworkCore;
 using PlanningBook.Identity.Application.Helpers.Interfaces;
+using System.Net.Http;
+using System.Text.Json;
+using System.Text;
 
 namespace PlanningBook.Identity.Application.Accounts.Commands
 {
@@ -39,7 +42,8 @@ namespace PlanningBook.Identity.Application.Accounts.Commands
     #region Command Handler
     public sealed class SignUpClientAccountCommandHandler(
         UserManager<Account> _accountManager,
-        IPasswordHasher _passwordHasher
+        IPasswordHasher _passwordHasher,
+        IHttpClientFactory _httpClientFactory
         )
         : ICommandHandler<SignUpClientAccountCommand, CommandResult<Guid>>
     {
@@ -124,6 +128,19 @@ namespace PlanningBook.Identity.Application.Accounts.Commands
             // TODO: Send to Person Service API to create Person record
             account.PasswordHash = passwordHash;
             await _accountManager.UpdateAsync(account);
+
+            #region Create Person
+            //TODO: Should use bus to handler
+            var client = _httpClientFactory.CreateClient("Person");
+            var jsonContent = new StringContent(JsonSerializer.Serialize(command), Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("ExposurePerson/Create", jsonContent);
+
+            if(response.IsSuccessStatusCode)
+            {
+                var test = 1;
+            }
+            #endregion Create Person
+
             return CommandResult<Guid>.Success(account.Id);
         }
     }

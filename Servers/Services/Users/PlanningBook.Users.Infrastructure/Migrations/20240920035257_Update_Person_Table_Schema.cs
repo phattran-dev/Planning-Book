@@ -3,49 +3,57 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace PlanningBook.Identity.Infrastructure.Migrations
+namespace PlanningBook.Users.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Add_SoftDelete_And_Active_For_Account_Table : Migration
+    public partial class Update_Person_Table_Schema : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "UpdatedById",
-                table: "Accounts",
-                newName: "UpdatedBy");
-
-            migrationBuilder.RenameColumn(
-                name: "CreatedById",
-                table: "Accounts",
-                newName: "DeletedBy");
-
             migrationBuilder.AddColumn<Guid>(
                 name: "CreatedBy",
-                table: "Accounts",
+                table: "Persons",
                 type: "uniqueidentifier",
                 nullable: true);
 
             migrationBuilder.AddColumn<DateTime>(
+                name: "CreatedDate",
+                table: "Persons",
+                type: "datetime2",
+                nullable: true);
+
+            migrationBuilder.AddColumn<DateTime>(
                 name: "DeletedAt",
-                table: "Accounts",
+                table: "Persons",
                 type: "datetime2",
                 nullable: true);
 
             migrationBuilder.AddColumn<bool>(
                 name: "IsActive",
-                table: "Accounts",
+                table: "Persons",
                 type: "bit",
                 nullable: false,
                 defaultValue: false);
 
             migrationBuilder.AddColumn<bool>(
                 name: "IsDeleted",
-                table: "Accounts",
+                table: "Persons",
                 type: "bit",
                 nullable: false,
                 defaultValue: false);
+
+            migrationBuilder.AddColumn<Guid>(
+                name: "UpdatedBy",
+                table: "Persons",
+                type: "uniqueidentifier",
+                nullable: true);
+
+            migrationBuilder.AddColumn<DateTime>(
+                name: "UpdatedDate",
+                table: "Persons",
+                type: "datetime2",
+                nullable: true);
         }
 
         /// <inheritdoc />
@@ -53,29 +61,31 @@ namespace PlanningBook.Identity.Infrastructure.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "CreatedBy",
-                table: "Accounts");
+                table: "Persons");
+
+            migrationBuilder.DropColumn(
+                name: "CreatedDate",
+                table: "Persons");
 
             migrationBuilder.DropColumn(
                 name: "DeletedAt",
-                table: "Accounts");
+                table: "Persons");
 
             migrationBuilder.DropColumn(
                 name: "IsActive",
-                table: "Accounts");
+                table: "Persons");
 
             migrationBuilder.DropColumn(
                 name: "IsDeleted",
-                table: "Accounts");
+                table: "Persons");
 
-            migrationBuilder.RenameColumn(
+            migrationBuilder.DropColumn(
                 name: "UpdatedBy",
-                table: "Accounts",
-                newName: "UpdatedById");
+                table: "Persons");
 
-            migrationBuilder.RenameColumn(
-                name: "DeletedBy",
-                table: "Accounts",
-                newName: "CreatedById");
+            migrationBuilder.DropColumn(
+                name: "UpdatedDate",
+                table: "Persons");
         }
     }
 }

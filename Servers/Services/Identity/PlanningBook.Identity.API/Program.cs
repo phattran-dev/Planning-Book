@@ -101,6 +101,14 @@ builder.Services.AddSwaggerGen(
 );
 #endregion Add Swagger
 
+#region Add Other services 
+builder.Services.AddHttpClient("Person", client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5002/api/");
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
+});
+#endregion Add Other services
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -110,6 +118,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// TODO: Handler action when token expired
 app.Use(async (context, next) =>
 {
     await next();

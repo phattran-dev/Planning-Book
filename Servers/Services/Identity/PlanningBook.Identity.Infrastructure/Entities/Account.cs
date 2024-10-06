@@ -17,9 +17,10 @@ namespace PlanningBook.Identity.Infrastructure.Entities
         public bool IsActive { get; set; }
 
         // One to many
-        public virtual ICollection<AccountClaim> Claims { get; set; }
-        public virtual ICollection<AccountLogin> Logins { get; set; }
-        public virtual ICollection<AccountRole> Roles { get; set; }
-        public virtual ICollection<AccountToken> Tokens { get; set; }
+        public ICollection<AccountClaim> Claims { get; set; }
+        public ICollection<AccountLogin> Logins { get; set; }
+        public ICollection<AccountRole> Roles { get; set; }
+        public ICollection<AccountToken> Tokens { get; set; }
+        public ICollection<AccountPerson> Persons { get; set; }
     }
 }

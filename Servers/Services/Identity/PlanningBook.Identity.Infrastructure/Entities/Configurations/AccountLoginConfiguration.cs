@@ -13,6 +13,11 @@ namespace PlanningBook.Identity.Infrastructure.Entities.Configurations
             builder.Property(p => p.UserId)
                 .HasColumnName(nameof(AccountLogin.AccountId));
             builder.Ignore(p => p.AccountId);
+
+            builder.HasOne(l => l.Account)
+                .WithMany(a => a.Logins)
+                .HasForeignKey(l => l.AccountId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
