@@ -16,7 +16,7 @@
             };
         }
 
-        public static CommandResult<TData> Failure(string? errorCode, string? errorMessages)
+        public static CommandResult<TData> Failure(string? errorCode = null, string? errorMessages = null)
         {
             return new CommandResult<TData>()
             {

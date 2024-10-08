@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlanningBook.Themes.Infrastructure;
 
@@ -11,9 +12,11 @@ using PlanningBook.Themes.Infrastructure;
 namespace PlanningBook.Themes.Infrastructure.Migrations
 {
     [DbContext(typeof(PBThemeDbContext))]
-    partial class PBProductDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241007182635_Add_ProductType_And_SubcriptionType_Columns_For_Product_Table")]
+    partial class Add_ProductType_And_SubcriptionType_Columns_For_Product_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace PlanningBook.Products.Infrastructure.Migrations
+namespace PlanningBook.Themes.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class Initial_Product_Database : Migration

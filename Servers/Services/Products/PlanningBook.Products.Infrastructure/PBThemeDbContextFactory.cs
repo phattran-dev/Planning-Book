@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using PlanningBook.DBEngine.Constants;
 
-namespace PlanningBook.Products.Infrastructure
+namespace PlanningBook.Themes.Infrastructure
 {
-    public class PBProductDbContextFactory : IDesignTimeDbContextFactory<PBProductDbContext>
+    public class PBThemeDbContextFactory : IDesignTimeDbContextFactory<PBThemeDbContext>
     {
-        public PBProductDbContext CreateDbContext(string[] args)
+        public PBThemeDbContext CreateDbContext(string[] args)
         {
             // Load configuration
             var configuration = new ConfigurationBuilder()
@@ -22,9 +22,9 @@ namespace PlanningBook.Products.Infrastructure
                             ? args[0]
                             : configuration[configurationPath];
 
-            var optionsBuilder = new DbContextOptionsBuilder<PBProductDbContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<PBThemeDbContext>();
             optionsBuilder.UseSqlServer(connectionString);
-            return new PBProductDbContext(optionsBuilder.Options);
+            return new PBThemeDbContext(optionsBuilder.Options);
         }
     }
 }

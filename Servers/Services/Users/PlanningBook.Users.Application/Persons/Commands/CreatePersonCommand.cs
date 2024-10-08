@@ -39,7 +39,6 @@ namespace PlanningBook.Users.Application.Persons.Commands
 
             var person = new Person()
             {
-                Id = new Guid(),
                 FirstName = command?.FirstName,
                 LastName = command?.LastName,
                 Email = command?.Email,

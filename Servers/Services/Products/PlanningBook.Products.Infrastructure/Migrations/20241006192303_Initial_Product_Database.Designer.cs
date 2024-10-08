@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PlanningBook.Products.Infrastructure;
+using PlanningBook.Themes.Infrastructure;
 
 #nullable disable
 
-namespace PlanningBook.Products.Infrastructure.Migrations
+namespace PlanningBook.Themes.Infrastructure.Migrations
 {
-    [DbContext(typeof(PBProductDbContext))]
+    [DbContext(typeof(PBThemeDbContext))]
     [Migration("20241006192303_Initial_Product_Database")]
     partial class Initial_Product_Database
     {
@@ -25,7 +25,7 @@ namespace PlanningBook.Products.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("PlanningBook.Products.Infrastructure.Entities.Order", b =>
+            modelBuilder.Entity("PlanningBook.Themes.Infrastructure.Entities.Order", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,7 +52,7 @@ namespace PlanningBook.Products.Infrastructure.Migrations
                     b.ToTable("Orders", (string)null);
                 });
 
-            modelBuilder.Entity("PlanningBook.Products.Infrastructure.Entities.OrderDetail", b =>
+            modelBuilder.Entity("PlanningBook.Themes.Infrastructure.Entities.OrderDetail", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -73,7 +73,7 @@ namespace PlanningBook.Products.Infrastructure.Migrations
                     b.ToTable("OrderDetails", (string)null);
                 });
 
-            modelBuilder.Entity("PlanningBook.Products.Infrastructure.Entities.Price", b =>
+            modelBuilder.Entity("PlanningBook.Themes.Infrastructure.Entities.Price", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -87,7 +87,7 @@ namespace PlanningBook.Products.Infrastructure.Migrations
                     b.ToTable("Prices", (string)null);
                 });
 
-            modelBuilder.Entity("PlanningBook.Products.Infrastructure.Entities.Product", b =>
+            modelBuilder.Entity("PlanningBook.Themes.Infrastructure.Entities.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -106,7 +106,7 @@ namespace PlanningBook.Products.Infrastructure.Migrations
                     b.ToTable("Products", (string)null);
                 });
 
-            modelBuilder.Entity("PlanningBook.Products.Infrastructure.Entities.ProductPrice", b =>
+            modelBuilder.Entity("PlanningBook.Themes.Infrastructure.Entities.ProductPrice", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -133,15 +133,15 @@ namespace PlanningBook.Products.Infrastructure.Migrations
                     b.ToTable("ProductPrices", (string)null);
                 });
 
-            modelBuilder.Entity("PlanningBook.Products.Infrastructure.Entities.OrderDetail", b =>
+            modelBuilder.Entity("PlanningBook.Themes.Infrastructure.Entities.OrderDetail", b =>
                 {
-                    b.HasOne("PlanningBook.Products.Infrastructure.Entities.Price", "Price")
+                    b.HasOne("PlanningBook.Themes.Infrastructure.Entities.Price", "Price")
                         .WithMany("OrderDetails")
                         .HasForeignKey("PriceId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("PlanningBook.Products.Infrastructure.Entities.Product", "Product")
+                    b.HasOne("PlanningBook.Themes.Infrastructure.Entities.Product", "Product")
                         .WithMany("OrderDetails")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -152,15 +152,15 @@ namespace PlanningBook.Products.Infrastructure.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("PlanningBook.Products.Infrastructure.Entities.ProductPrice", b =>
+            modelBuilder.Entity("PlanningBook.Themes.Infrastructure.Entities.ProductPrice", b =>
                 {
-                    b.HasOne("PlanningBook.Products.Infrastructure.Entities.Price", "Price")
+                    b.HasOne("PlanningBook.Themes.Infrastructure.Entities.Price", "Price")
                         .WithMany()
                         .HasForeignKey("PriceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PlanningBook.Products.Infrastructure.Entities.Product", "Product")
+                    b.HasOne("PlanningBook.Themes.Infrastructure.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -171,12 +171,12 @@ namespace PlanningBook.Products.Infrastructure.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("PlanningBook.Products.Infrastructure.Entities.Price", b =>
+            modelBuilder.Entity("PlanningBook.Themes.Infrastructure.Entities.Price", b =>
                 {
                     b.Navigation("OrderDetails");
                 });
 
-            modelBuilder.Entity("PlanningBook.Products.Infrastructure.Entities.Product", b =>
+            modelBuilder.Entity("PlanningBook.Themes.Infrastructure.Entities.Product", b =>
                 {
                     b.Navigation("OrderDetails");
                 });

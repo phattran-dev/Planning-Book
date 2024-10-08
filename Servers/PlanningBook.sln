@@ -50,13 +50,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SupportCallServerToServer", "BuildingBlocks\Presitance\SupportCallServerToServer\SupportCallServerToServer.csproj", "{3DF19762-9694-48E6-B928-15346FC2BEF4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Products", "Products", "{C0A91C83-7248-4972-86BA-E98180527DE1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Themes", "Themes", "{C0A91C83-7248-4972-86BA-E98180527DE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanningBook.Products.Infrastructure", "Services\Products\PlanningBook.Products.Infrastructure\PlanningBook.Products.Infrastructure.csproj", "{F268F171-106B-4354-91DA-E007A89AACA6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanningBook.Themes.Infrastructure", "Services\Products\PlanningBook.Products.Infrastructure\PlanningBook.Themes.Infrastructure.csproj", "{F268F171-106B-4354-91DA-E007A89AACA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanningBook.Products.Application", "Services\Products\PlanningBook.Products.Application\PlanningBook.Products.Application.csproj", "{E51347E9-2164-4042-A402-81365CACDBC1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanningBook.Themes.Application", "Services\Products\PlanningBook.Products.Application\PlanningBook.Themes.Application.csproj", "{E51347E9-2164-4042-A402-81365CACDBC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanningBook.Products.API", "Services\Products\PlanningBook.Products.API\PlanningBook.Products.API.csproj", "{75B48473-72A0-4833-A6EA-3F66EB1987A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanningBook.Themes.API", "Services\Products\PlanningBook.Products.API\PlanningBook.Themes.API.csproj", "{75B48473-72A0-4833-A6EA-3F66EB1987A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

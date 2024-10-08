@@ -2,7 +2,7 @@
 using PlanningBook.Domain.Interfaces;
 using PlanningBook.Repository.EF;
 
-namespace PlanningBook.Products.API.Extensions
+namespace PlanningBook.Themes.API.Extensions
 {
     public static class IServiceCollectionExtensions
     {

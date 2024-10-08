@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PlanningBook.DBEngine.Constants;
 
-namespace PlanningBook.Products.Infrastructure
+namespace PlanningBook.Themes.Infrastructure
 {
     public static class Startup
     {
@@ -11,7 +11,7 @@ namespace PlanningBook.Products.Infrastructure
         {
             //TODO-Improve: Use DBEngine in BuildingBlock for add db connection
             var test = $"{DBEngineConstants.RootConnectionString}:Product{DBEngineConstants.dbConnectionStringPrefix}";
-            services.AddDbContext<PBProductDbContext>(options => options.UseSqlServer(configuration[test]));
+            services.AddDbContext<PBThemeDbContext>(options => options.UseSqlServer(configuration[test]));
         }
     }
 }

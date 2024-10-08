@@ -1,6 +1,6 @@
-@PlanningBook.Products.API_HostAddress = http://localhost:5271
+@PlanningBook.Themes.API_HostAddress = http://localhost:5271
 
-GET {{PlanningBook.Products.API_HostAddress}}/weatherforecast/
+GET {{PlanningBook.Themes.API_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###

@@ -11,7 +11,7 @@
             return new ValidationResult() { IsValid = true };
         }
 
-        public static ValidationResult Failure(List<string>? ErrorCodes, List<string>? Messages)
+        public static ValidationResult Failure(List<string>? ErrorCodes = null, List<string>? Messages = null)
         {
             return new ValidationResult()
             {

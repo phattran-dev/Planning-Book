@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using PlanningBook.Products.API.Extensions;
-using PlanningBook.Products.Infrastructure;
+using PlanningBook.Themes.API.Extensions;
+using PlanningBook.Themes.Infrastructure;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);

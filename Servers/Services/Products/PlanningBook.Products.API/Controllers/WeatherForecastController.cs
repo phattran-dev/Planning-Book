@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace PlanningBook.Products.API.Controllers
+namespace PlanningBook.Themes.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PlanningBook.DBEngine;
 
-namespace PlanningBook.Products.Infrastructure.Entities.Configurations
+namespace PlanningBook.Themes.Infrastructure.Entities.Configurations
 {
     public class PriceConfiguration : BaseRelationDbEntityTypeConfiguration<Price>
     {

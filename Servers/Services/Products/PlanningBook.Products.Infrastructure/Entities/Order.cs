@@ -1,7 +1,7 @@
 ﻿using PlanningBook.Domain;
 using PlanningBook.Domain.Interfaces;
 
-namespace PlanningBook.Products.Infrastructure.Entities
+namespace PlanningBook.Themes.Infrastructure.Entities
 {
     public class Order : EntityBase<Guid>, IDateAudited, IAuthorAudited<Guid>
     {
@@ -12,3 +12,4 @@ namespace PlanningBook.Products.Infrastructure.Entities
         public Guid UpdatedBy { get; set; }
     }
 }
+ 

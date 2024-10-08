@@ -1,7 +1,7 @@
 ﻿using PlanningBook.Domain;
 using PlanningBook.Domain.Interfaces;
 
-namespace PlanningBook.Products.Infrastructure.Entities
+namespace PlanningBook.Themes.Infrastructure.Entities
 {
     public class ProductPrice : EntityBase<Guid>, IDateAudited
     {
@@ -9,8 +9,5 @@ namespace PlanningBook.Products.Infrastructure.Entities
         public Guid PriceId { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
-
-        public virtual Product Product { get; set; }
-        public virtual Price Price { get; set; }
     }
 }

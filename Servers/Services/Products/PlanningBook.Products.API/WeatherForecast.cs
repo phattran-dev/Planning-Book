@@ -1,4 +1,4 @@
-namespace PlanningBook.Products.API
+namespace PlanningBook.Themes.API
 {
     public class WeatherForecast
     {

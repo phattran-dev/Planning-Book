@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace PlanningBook.Products.Infrastructure
+namespace PlanningBook.Themes.Infrastructure
 {
-    public class PBProductDbContext : DbContext
+    public class PBThemeDbContext : DbContext
     {
-        public PBProductDbContext(DbContextOptions<PBProductDbContext> options) : base(options) { }
+        public PBThemeDbContext(DbContextOptions<PBThemeDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

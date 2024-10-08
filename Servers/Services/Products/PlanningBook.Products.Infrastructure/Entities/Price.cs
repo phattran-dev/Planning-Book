@@ -1,6 +1,6 @@
 ﻿using PlanningBook.Domain;
 
-namespace PlanningBook.Products.Infrastructure.Entities
+namespace PlanningBook.Themes.Infrastructure.Entities
 {
     public class Price : EntityBase<Guid>
     {
