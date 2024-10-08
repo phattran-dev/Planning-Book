@@ -7,4 +7,4 @@ Step 2:
 Add-Migration <Migration_Record_Name> -StartupProject PlanningBook.<Service_Name>.API -Project PlanningBook.<Service_Name>.Infrastructure -v 
 
 *Apply new change for databse:
-update-database -s PlanningBook.Identity.API
+update-database -s PlanningBook.<Service_Name>.API
