@@ -8,7 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\Presitance\Planning_book.Repository.EF\PlanningBook.Repository.EF.csproj" />
-    <ProjectReference Include="..\PlanningBook.Products.Infrastructure\PlanningBook.Products.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\Frameworks\Planning_book.Domain\PlanningBook.Domain.csproj" />
+    <ProjectReference Include="..\PlanningBook.Themes.Infrastructure\PlanningBook.Themes.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,10 +7,10 @@ namespace PlanningBook.Themes.Infrastructure
 {
     public static class Startup
     {
-        public static void AddPBProductDbContext(this IServiceCollection services, IConfiguration configuration)
+        public static void AddPBThemeDbContext(this IServiceCollection services, IConfiguration configuration)
         {
             //TODO-Improve: Use DBEngine in BuildingBlock for add db connection
-            var test = $"{DBEngineConstants.RootConnectionString}:Product{DBEngineConstants.dbConnectionStringPrefix}";
+            var test = $"{DBEngineConstants.RootConnectionString}:Theme{DBEngineConstants.dbConnectionStringPrefix}";
             services.AddDbContext<PBThemeDbContext>(options => options.UseSqlServer(configuration[test]));
         }
     }

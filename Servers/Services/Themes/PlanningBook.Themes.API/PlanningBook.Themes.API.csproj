@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -16,8 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PlanningBook.Products.Application\PlanningBook.Products.Application.csproj" />
-    <ProjectReference Include="..\PlanningBook.Products.Infrastructure\PlanningBook.Products.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\Presitance\Planning_book.Repository.EF\PlanningBook.Repository.EF.csproj" />
+    <ProjectReference Include="..\PlanningBook.Themes.Application\PlanningBook.Themes.Application.csproj" />
+    <ProjectReference Include="..\PlanningBook.Themes.Infrastructure\PlanningBook.Themes.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

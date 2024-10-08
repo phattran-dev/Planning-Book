@@ -25,7 +25,7 @@ namespace PlanningBook.Themes.API.Extensions
             return services;
         }
 
-        public static IServiceCollection RegistryProductModule(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection RegistryThemeModule(this IServiceCollection services, IConfiguration configuration)
         {
 
             return services;

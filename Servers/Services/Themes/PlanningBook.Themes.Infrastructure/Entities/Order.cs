@@ -12,4 +12,3 @@ namespace PlanningBook.Themes.Infrastructure.Entities
         public Guid UpdatedBy { get; set; }
     }
 }
- 

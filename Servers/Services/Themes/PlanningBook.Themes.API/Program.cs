@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PlanningBook.Themes.API.Extensions;
@@ -12,15 +11,15 @@ var configuration = builder.Configuration;
 
 builder.Services.AddControllers();
 
-#region Add DbContexts
-builder.Services.AddPBProductDbContext(configuration);
+#region Add DContexts
+builder.Services.AddPBThemeDbContext(configuration);
 #endregion Add DbContexts
 
 #region Add Services
 builder.Services
     .AddRepositories()
     .RegistryCommandQueryExecutor(configuration)
-    .RegistryProductModule(configuration);
+    .RegistryThemeModule(configuration);
 #endregion Add Services
 
 #region Add Authentication

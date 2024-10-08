@@ -17,7 +17,7 @@ namespace PlanningBook.Themes.Infrastructure
                 .AddEnvironmentVariables()
                 .Build();
 
-            var configurationPath = $"{DBEngineConstants.RootConnectionString}:Product{DBEngineConstants.dbConnectionStringPrefix}";
+            var configurationPath = $"{DBEngineConstants.RootConnectionString}:Theme{DBEngineConstants.dbConnectionStringPrefix}";
             var connectionString = (args != null && args.Length > 0 && !string.IsNullOrEmpty(args[0]))
                             ? args[0]
                             : configuration[configurationPath];
