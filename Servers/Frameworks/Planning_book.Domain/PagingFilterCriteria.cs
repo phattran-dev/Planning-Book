@@ -7,7 +7,7 @@ namespace PlanningBook.Domain
     {
         public int PageIndex { get; set; }
         public int NumberItemsPerPage { get; set; }
-        public List<Tuple<string, SortDirection>> SortCriteria { get; set; }
-        public string QueryText { get; set; }
+        public List<Tuple<string, SortDirection>>? SortCriteria { get; set; }
+        public string? QueryText { get; set; }
     }
 }

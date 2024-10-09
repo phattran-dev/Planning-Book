@@ -2,5 +2,6 @@
 {
     public interface IQuery<TResult>
     {
+        public ValidationResult GetValidationResult();
     }
 }

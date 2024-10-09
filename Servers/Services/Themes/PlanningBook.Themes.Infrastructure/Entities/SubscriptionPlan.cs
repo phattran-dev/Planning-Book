@@ -8,5 +8,6 @@ namespace PlanningBook.Themes.Infrastructure.Entities
         public string Name { get; set; }
         public string? Description { get; set; }
         public SubscriptionType Type { get; set; }
+        public decimal Price { get; set; }
     }
 }

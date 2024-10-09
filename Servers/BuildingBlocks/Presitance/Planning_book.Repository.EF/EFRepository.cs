@@ -144,7 +144,7 @@ namespace PlanningBook.Repository.EF
             return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(whereCondition, cancellationToken);
         }
 
-        public async Task<IEnumerable<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> whereCondition, int pageIndex = 0, int numberItemsPerPage = 0, List<Tuple<string, SortDirection>> sortCriteria = null, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<TEntity>> GetListAsync(Expression<Func<TEntity, bool>>? whereCondition, int pageIndex = 0, int numberItemsPerPage = 0, List<Tuple<string, SortDirection>> sortCriteria = null, CancellationToken cancellationToken = default)
         {
             var result = _dbContext.Set<TEntity>().AsNoTracking().AsQueryable();
             var elementType = result.ElementType;

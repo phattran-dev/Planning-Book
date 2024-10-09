@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PlanningBook.Themes.API.Extensions;
+using PlanningBook.Themes.Application.Models;
+using PlanningBook.Themes.Application.Services;
 using PlanningBook.Themes.Infrastructure;
 using System.Text;
 
@@ -86,6 +88,12 @@ builder.Services.AddSwaggerGen(
     }
 );
 #endregion Add Swagger
+
+#region Add Stripe
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+Stripe.StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+builder.Services.AddSingleton<StripePaymentService>();
+#endregion Add Stripe
 
 var app = builder.Build();
 

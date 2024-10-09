@@ -11,7 +11,7 @@ namespace PlanningBook.Domain.Interfaces
         Task<TEntity> GetByIdAsync(Guid Id, CancellationToken cancellationToken = default);
         Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> whereCondition = null, CancellationToken cancellationToken = default);
         Task<IEnumerable<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> whereCondition, int pageIndex = 0, int numberItemsPerPage = 0, List<Tuple<string, SortDirection>> sortCriteria = null, CancellationToken cancellationToken = default);
-        Task<int> CountAsync(Expression<Func<TEntity, bool>> whereCondition = null, CancellationToken cancellationToken = default);
+        Task<int> CountAsync(Expression<Func<TEntity, bool>>? whereCondition = null, CancellationToken cancellationToken = default);
         Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default);
         Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
         Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default);

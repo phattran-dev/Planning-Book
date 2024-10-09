@@ -4,7 +4,7 @@ using PlanningBook.Repository.EF;
 using PlanningBook.Themes.Infrastructure;
 using PlanningBook.Themes.Infrastructure.Entities;
 
-namespace PlanningBook.Themes.Application.Products.Commands
+namespace PlanningBook.Themes.Application.Domain.Themes.Commands
 {
     #region Command Model
     public sealed class CreateThemeCommand : ICommand<CommandResult<Guid>>
@@ -29,7 +29,7 @@ namespace PlanningBook.Themes.Application.Products.Commands
     #endregion Command Model
 
     #region Command Handler
-    public sealed class CreateProductCommandHandler(
+    public sealed class CreateThemeCommandHandler(
         IEFRepository<PBThemeDbContext, Theme, Guid> _themeRepository) : ICommandHandler<CreateThemeCommand, CommandResult<Guid>>
     {
         public async Task<CommandResult<Guid>> HandleAsync(CreateThemeCommand command, CancellationToken cancellationToken = default)
@@ -43,8 +43,8 @@ namespace PlanningBook.Themes.Application.Products.Commands
                 Description = command?.Description,
             };
 
-            await _themeRepository.AddAsync(product);
-            await _themeRepository.SaveChangeAsync();
+            await _themeRepository.AddAsync(product, cancellationToken);
+            await _themeRepository.SaveChangeAsync(cancellationToken);
 
             return CommandResult<Guid>.Success(product.Id);
         }
