@@ -12,39 +12,47 @@ namespace PlanningBook.Themes.Application.Services
             StripeConfiguration.ApiKey = stripeSettings.Value.SecretKey;
         }
 
-        public Session CreateCheckoutSession(string successUrl, string cancelUrl)
+        //public Session CreateCheckoutSession(string successUrl, string cancelUrl)
+        //{
+        //    var options = new SessionCreateOptions
+        //    {
+        //        PaymentMethodTypes = new List<string>
+        //    {
+        //        "card",
+        //    },
+        //        LineItems = new List<SessionLineItemOptions>
+        //    {
+        //        new SessionLineItemOptions
+        //        {
+        //            PriceData = new SessionLineItemPriceDataOptions
+        //            {
+        //                UnitAmount = 2000, // For example, $20.00 (this value is in cents)
+        //                Currency = "usd",
+        //                ProductData = new SessionLineItemPriceDataProductDataOptions
+        //                {
+        //                    Name = "T-shirt",
+        //                },
+        //            },
+        //            Quantity = 1,
+        //        },
+        //    },
+        //        Mode = "payment",
+        //        SuccessUrl = successUrl,
+        //        CancelUrl = cancelUrl,
+        //    };
+
+        //    var service = new SessionService();
+        //    Session session = service.Create(options);
+
+        //    return session;
+        //}
+
+        public async Task<Session> Checkout(string successUrl,
+            string cancelUrl,
+            Dictionary<string, string> metadata,
+            string email)
         {
-            var options = new SessionCreateOptions
-            {
-                PaymentMethodTypes = new List<string>
-            {
-                "card",
-            },
-                LineItems = new List<SessionLineItemOptions>
-            {
-                new SessionLineItemOptions
-                {
-                    PriceData = new SessionLineItemPriceDataOptions
-                    {
-                        UnitAmount = 2000, // For example, $20.00 (this value is in cents)
-                        Currency = "usd",
-                        ProductData = new SessionLineItemPriceDataProductDataOptions
-                        {
-                            Name = "T-shirt",
-                        },
-                    },
-                    Quantity = 1,
-                },
-            },
-                Mode = "payment",
-                SuccessUrl = successUrl,
-                CancelUrl = cancelUrl,
-            };
 
-            var service = new SessionService();
-            Session session = service.Create(options);
-
-            return session;
         }
 
         public async Task<Session> Test(string origin)

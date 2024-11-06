@@ -1,0 +1,49 @@
+<!-- app.component.html -->
+<div class="login-container">
+    <div class="login-card">
+        <img class="logo"
+             src="your-logo.png"
+             alt="Logo">
+        <h2>Log in to your account</h2>
+        <form>
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput
+                       type="email"
+                       placeholder="designer@example.com"
+                       tabindex="0">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput
+                       type="password"
+                       placeholder="password"
+                       tabindex="1"
+                       [type]="hide() ? 'password' : 'text'">
+                <button mat-icon-button
+                        matSuffix
+                        tabindex="2"
+                        type="button"
+                        [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide()"
+                        (click)="togglePasswordVisibility()">
+                    <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <div class="forgot-password">
+                <a href="#">Forgot password?</a>
+            </div>
+
+            <button mat-raised-button
+                    color="primary"
+                    class="login-button"
+                    (click)="onClick()">Log in</button>
+
+            <div class="signup">
+                <span>Don't have an account?</span> <a href="#">Sign up</a>
+            </div>
+        </form>
+    </div>
+</div>
