@@ -1,1 +1,53 @@
-<p>sign-up works!</p>
+<!-- app.component.html -->
+<div class="sign-up-container">
+    <div class="sign-up-card">
+        <img class="logo"
+             src="your-logo.png"
+             alt="Logo">
+        <h2>Create new account</h2>
+        <form>
+            <mat-form-field appearance="outline">
+                <mat-label>Full name</mat-label>
+                <input matInput
+                       type="email"
+                       placeholder="designer@example.com"
+                       tabindex="0">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput
+                       type="email"
+                       placeholder="designer@example.com"
+                       tabindex="1">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput
+                       type="password"
+                       placeholder="password"
+                       tabindex="2"
+                       [type]="hide() ? 'password' : 'text'">
+                <button mat-icon-button
+                        matSuffix
+                        tabindex="3"
+                        type="button"
+                        [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide()"
+                        (click)="togglePasswordVisibility()">
+                    <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <button mat-raised-button
+                    color="primary"
+                    class="sign-up-button"
+                    (click)="onClick()">Sign up</button>
+
+            <div class="signup">
+                <span>Already have an account?</span> <a href="/sign-in"> Sign in</a>
+            </div>
+        </form>
+    </div>
+</div>

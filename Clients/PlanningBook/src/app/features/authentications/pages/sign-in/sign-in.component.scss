@@ -5,7 +5,7 @@ $button-primary-color: #4e8ef7;
 $link-color: #4e8ef7;
 $box-shadow-color: rgba(0, 0, 0, 0.5);
 
-.login-container {
+.sign-in-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,7 +13,7 @@ $box-shadow-color: rgba(0, 0, 0, 0.5);
     background-color: $background-color;
 }
 
-.login-card {
+.sign-in-card {
     width: 360px;
     padding: 2em;
     background-color: $card-background-color;
@@ -43,8 +43,8 @@ $box-shadow-color: rgba(0, 0, 0, 0.5);
         }
     }
 
-    .login-button,
-    .google-login {
+    .sign-in-button,
+    .google-sign-in {
         width: 100%;
         margin-bottom: 1em;
     }

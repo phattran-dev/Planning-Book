@@ -1,6 +1,6 @@
 <!-- app.component.html -->
-<div class="login-container">
-    <div class="login-card">
+<div class="sign-in-container">
+    <div class="sign-in-card">
         <img class="logo"
              src="your-logo.png"
              alt="Logo">
@@ -33,16 +33,16 @@
             </mat-form-field>
 
             <div class="forgot-password">
-                <a href="#">Forgot password?</a>
+                <a href="/reset-password">Forgot password?</a>
             </div>
 
             <button mat-raised-button
                     color="primary"
-                    class="login-button"
-                    (click)="onClick()">Log in</button>
+                    class="sign-in-button"
+                    (click)="onClick()">Sign in</button>
 
             <div class="signup">
-                <span>Don't have an account?</span> <a href="#">Sign up</a>
+                <span>Don't have an account?</span> <a href="/sign-up"> Sign up</a>
             </div>
         </form>
     </div>

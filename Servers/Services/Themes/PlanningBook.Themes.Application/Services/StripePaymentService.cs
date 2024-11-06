@@ -47,13 +47,13 @@ namespace PlanningBook.Themes.Application.Services
         //    return session;
         //}
 
-        public async Task<Session> Checkout(string successUrl,
-            string cancelUrl,
-            Dictionary<string, string> metadata,
-            string email)
-        {
+        //public async Task<Session> Checkout(string successUrl,
+        //    string cancelUrl,
+        //    Dictionary<string, string> metadata,
+        //    string email)
+        //{
 
-        }
+        //}
 
         public async Task<Session> Test(string origin)
         {

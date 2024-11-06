@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-sign-up',
@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrl: './sign-up.component.scss'
 })
 export class SignUpComponent {
+  hide = signal(true);
+  togglePasswordVisibility() {
+    this.hide.set(!this.hide());
+  }
 
+  onClick() {
+    console.log('test');
+  }
 }
