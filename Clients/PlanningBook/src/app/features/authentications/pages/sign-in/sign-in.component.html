@@ -4,7 +4,7 @@
         <img class="logo"
              src="your-logo.png"
              alt="Logo">
-        <h2>Log in to your account</h2>
+        <h2>Sign in to your account</h2>
         <form>
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
@@ -20,15 +20,15 @@
                        type="password"
                        placeholder="password"
                        tabindex="1"
-                       [type]="hide() ? 'password' : 'text'">
+                       [type]="hidePassword() ? 'password' : 'text'">
                 <button mat-icon-button
                         matSuffix
                         tabindex="2"
                         type="button"
                         [attr.aria-label]="'Hide password'"
-                        [attr.aria-pressed]="hide()"
+                        [attr.aria-pressed]="hidePassword()"
                         (click)="togglePasswordVisibility()">
-                    <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-icon>{{hidePassword() ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
             </mat-form-field>
 
@@ -39,7 +39,8 @@
             <button mat-raised-button
                     color="primary"
                     class="sign-in-button"
-                    (click)="onClick()">Sign in</button>
+                    type="button"
+                    (click)="onSignIn()">Sign in</button>
 
             <div class="signup">
                 <span>Don't have an account?</span> <a href="/sign-up"> Sign up</a>

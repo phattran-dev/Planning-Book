@@ -1,0 +1,60 @@
+:host {
+    .home-page {
+        width: 100vw;
+        height: 100vh;
+        background-color: #444444;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .header {
+        max-height: 10%;
+        width: 100vw;
+        border-bottom: solid 1px burlywood;
+    }
+
+    .body {
+        height: 80%;
+        width: 100vw;
+        // margin: 10px 0;
+        border-top: solid 1px burlywood;
+        border-bottom: solid 1px burlywood;
+    }
+
+    .footer {
+        max-height: 10%;
+        width: 100vw;
+        border-top: solid 1px burlywood;
+
+    }
+
+    .corner-btn {
+        width: 50px;
+        height: 50px;
+        background-color: #777;
+        border: none;
+        border-radius: 50%;
+        // position: absolute;
+
+        // &.top-left {
+        //     top: 20px;
+        //     left: 20px;
+        // }
+
+        // &.top-right {
+        //     top: 20px;
+        //     right: 20px;
+        // }
+
+        // &.bottom-left {
+        //     bottom: 20px;
+        //     left: 20px;
+        // }
+
+        // &.bottom-right {
+        //     bottom: 20px;
+        //     right: 20px;
+        // }
+    }
+}
