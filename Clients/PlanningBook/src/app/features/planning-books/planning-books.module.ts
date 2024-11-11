@@ -5,7 +5,6 @@ import { PlanningBooksRoutingModule } from './planning-books-routing.module';
 import { PlanningBooksComponent } from './planning-books.component';
 import { RouterModule } from '@angular/router';
 
-
 @NgModule({
   declarations: [
     PlanningBooksComponent
