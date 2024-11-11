@@ -152,4 +152,10 @@ body {
   background-color: #777;
   border: none;
   border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #555;
+  }
 }
