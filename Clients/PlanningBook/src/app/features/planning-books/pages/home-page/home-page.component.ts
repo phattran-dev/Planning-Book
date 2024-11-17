@@ -13,7 +13,6 @@ export class HomePageComponent implements OnInit {
   }
 
   onMembership() {
-    console.log('Hit');
     this.#router.navigateByUrl('/memberships');
   }
 }

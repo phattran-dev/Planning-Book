@@ -22,10 +22,22 @@
             border-radius: 10px;
             margin-right: 10px;
 
-            h1 {
-                font-size: 36px;
-                margin: 0;
+            .username-block {
+                display: flex;
+                flex-direction: row;
+                margin-bottom: 20px;
+
+                h1 {
+                    font-size: 36px;
+                    margin: 0 0 0 10px;
+                }
+
+                i {
+                    font-size: 36px;
+                    cursor: pointer;
+                }
             }
+
 
             p {
                 font-size: 18px;
@@ -55,6 +67,9 @@
             padding: 20px;
             margin: 0 10px;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
 
             h2 {
                 font-size: 24px;

@@ -1,7 +1,11 @@
 <div class="membership-page">
     <div class="header">
         <div class="header-text">
-            <h1>USER NAME</h1>
+            <div class="username-block">
+                <i class="fas fa-arrow-circle-left"
+                   (click)="onBackHomePage()"></i>
+                <h1>USER NAME</h1>
+            </div>
             <p>Unlimited access to premium theming, create unlimited planning books, and advanced features—unlock it all
                 with a
                 subscription today!</p>
@@ -10,10 +14,13 @@
     </div>
     <div class="plans">
         <div class="plan basic">
-            <h2>Basic</h2>
-            <div class="price">$150 <del>$188</del></div>
-            <div class="billing">Paid quarterly</div>
-            <div class="discount">20% discount applied</div>
+            <div>
+                <h2>Basic</h2>
+                <div class="price">$150 <del>$188</del></div>
+                <div class="billing">Paid quarterly</div>
+                <div class="discount">20% discount applied</div>
+            </div>
+
             <ul>
                 <li><i class="fas fa-check"></i>Access to all themes</li>
                 <li><i class="fas fa-check"></i>15% off subscription renewal</li>
@@ -21,10 +28,13 @@
             <button>Get Basic</button>
         </div>
         <div class="plan elite">
-            <h2>Elite</h2>
-            <div class="price">$294 <del>$368</del></div>
-            <div class="billing">Paid yearly</div>
-            <div class="discount">20% discount applied</div>
+            <div>
+                <h2>Elite</h2>
+                <div class="price">$294 <del>$368</del></div>
+                <div class="billing">Paid yearly</div>
+                <div class="discount">20% discount applied</div>
+            </div>
+
             <ul>
                 <li><i class="fas fa-check"></i>Access to all themes</li>
                 <li><i class="fas fa-check"></i>Create unlimited planning books</li>
@@ -33,10 +43,13 @@
             <button>Get Elite</button>
         </div>
         <div class="plan lifetime">
-            <h2>Lifetime</h2>
-            <div class="price">$710 <del>$888</del></div>
-            <div class="billing">One-time purchase</div>
-            <div class="discount">20% discount applied</div>
+            <div>
+                <h2>Lifetime</h2>
+                <div class="price">$710 <del>$888</del></div>
+                <div class="billing">One-time purchase</div>
+                <div class="discount">20% discount applied</div>
+            </div>
+
             <ul>
                 <li><i class="fas fa-check"></i>Access to all themes</li>
                 <li><i class="fas fa-check"></i>Create unlimited planning books</li>
