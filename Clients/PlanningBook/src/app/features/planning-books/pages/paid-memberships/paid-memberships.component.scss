@@ -14,32 +14,32 @@
         width: 100%;
         max-width: 1200px;
         margin-bottom: 20px;
-    }
 
-    .header-text {
-        flex: 1;
-        padding: 20px;
-        background-color: #1e1e1e;
-        border-radius: 10px;
-        margin-right: 10px;
+        .header-text {
+            flex: 1;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            margin-right: 10px;
 
-        h1 {
-            font-size: 36px;
-            margin: 0;
+            h1 {
+                font-size: 36px;
+                margin: 0;
+            }
+
+            p {
+                font-size: 18px;
+                margin: 10px 0 0;
+            }
         }
 
-        p {
-            font-size: 18px;
-            margin: 10px 0 0;
+        .header-image {
+            flex: 1;
+            background-image: url('https://placehold.co/600x400');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
         }
-    }
-
-    .header-image {
-        flex: 1;
-        background-image: url('https://placehold.co/600x400');
-        background-size: cover;
-        background-position: center;
-        border-radius: 10px;
     }
 
     .plans {
@@ -47,82 +47,87 @@
         justify-content: space-between;
         width: 100%;
         max-width: 1200px;
-    }
 
-    .plan {
-        flex: 1;
-        background-color: #1e1e1e;
-        border-radius: 10px;
-        padding: 20px;
-        margin: 0 10px;
-        text-align: center;
+        .plan {
+            flex: 1;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 0 10px;
+            text-align: center;
 
-        h2 {
-            font-size: 24px;
-            margin: 0 0 10px;
-            color: #888;
-        }
-
-        .price {
-            font-size: 48px;
-            margin: 10px 0;
-
-            del {
+            h2 {
                 font-size: 24px;
+                margin: 0 0 10px;
                 color: #888;
             }
-        }
 
-        .billing,
-        .discount {
-            font-size: 16px;
-            color: #888;
-        }
-
-        .discount {
-            color: #1e90ff;
-            margin: 5px 0;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-            text-align: left;
-
-            li {
-                font-size: 16px;
+            .price {
+                font-size: 48px;
                 margin: 10px 0;
-                display: flex;
-                align-items: center;
 
-                i {
-                    color: #1e90ff;
-                    margin-right: 10px;
+                del {
+                    font-size: 24px;
+                    color: #888;
                 }
             }
-        }
 
-        button {
-            background-color: #1e90ff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-
-            &:hover {
-                background-color: #1c86ee;
+            .billing,
+            .discount {
+                font-size: 16px;
+                color: #888;
             }
-        }
 
-        &.elite .price {
-            color: #1e90ff;
-        }
+            .discount {
+                color: #1e90ff;
+                margin: 5px 0;
+            }
 
-        &.lifetime .price {
-            color: #32cd32;
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 20px 0;
+                text-align: left;
+
+                li {
+                    font-size: 16px;
+                    margin: 10px 0;
+                    display: flex;
+                    align-items: center;
+
+                    i {
+                        color: #1e90ff;
+                        margin-right: 10px;
+                    }
+                }
+            }
+
+            button {
+                background-color: #1e90ff;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 5px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #1c86ee;
+                }
+            }
+
+            &.basic {
+                margin-left: 0;
+            }
+
+            &.elite .price {
+                color: #1e90ff;
+            }
+
+            &.lifetime .price {
+                margin-right: 0;
+                color: #32cd32;
+            }
         }
     }
 }
