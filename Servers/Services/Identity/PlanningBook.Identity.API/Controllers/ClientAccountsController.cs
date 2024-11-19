@@ -19,7 +19,7 @@ namespace PlanningBook.Identity.API.Controllers
     {
 
         [AllowAnonymous]
-        [HttpPost("SignUp")]
+        [HttpPost("sign-up")]
         public async Task<ActionResult<CommandResult<Guid>>> SignUp([FromBody] SignUpClientAccountCommand command)
         {
             var result = await _commandExecutor.ExecuteAsync(command);
@@ -31,7 +31,7 @@ namespace PlanningBook.Identity.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("SignIn")]
+        [HttpPost("sign-in")]
         public async Task<ActionResult<CommandResult<SignInClientAccountCommandResult>>> SignIn([FromBody] SignInClientAccountCommand command)
         {
             

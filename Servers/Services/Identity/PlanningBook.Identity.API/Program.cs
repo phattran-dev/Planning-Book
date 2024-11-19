@@ -13,6 +13,16 @@ var configuration = builder.Configuration;
 
 // Add services to the container.
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigins", builder =>
+    {
+        builder.WithOrigins("http://localhost:4200")
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddControllers();
 
 #region Add DbContexts
@@ -134,6 +144,8 @@ app.UseHttpsRedirection();
 
 // Auto generate API for authen
 //app.MapIdentityApi<Account>();
+
+app.UseCors("AllowSpecificOrigins");
 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -10,29 +10,29 @@ namespace PlanningBook.Themes.API.Controllers
     [AllowAnonymous] //TODO: TESTing
     public class PaymentController(StripePaymentService _paymentService) : ControllerBase
     {
-        [HttpPost("create-checkout-session")]
-        public async Task<ActionResult> CreateCheckoutSession([FromBody] )
-        {
-            //var session = _paymentService.CreateCheckoutSession(
-            //   "https://yourdomain.com/payment/success?sessionId={CHECKOUT_SESSION_ID}",
-            //   "https://yourdomain.com/payment/cancel?sessionId={CHECKOUT_SESSION_ID}"
-            //);
+        //[HttpPost("create-checkout-session")]
+        //public async Task<ActionResult> CreateCheckoutSession()
+        //{
+        //    //var session = _paymentService.CreateCheckoutSession(
+        //    //   "https://yourdomain.com/payment/success?sessionId={CHECKOUT_SESSION_ID}",
+        //    //   "https://yourdomain.com/payment/cancel?sessionId={CHECKOUT_SESSION_ID}"
+        //    //);
 
-            // Record the session in your DB
-            //_context.PaymentRecords.Add(new PaymentRecord
-            //{
-            //    StripeSessionId = session.Id,
-            //    Created = DateTime.UtcNow,
-            //    Status = "Created"
-            //});
-            //_context.SaveChanges();
+        //    // Record the session in your DB
+        //    //_context.PaymentRecords.Add(new PaymentRecord
+        //    //{
+        //    //    StripeSessionId = session.Id,
+        //    //    Created = DateTime.UtcNow,
+        //    //    Status = "Created"
+        //    //});
+        //    //_context.SaveChanges();
 
-            var origin = $"{Request.Scheme}://{Request.Host}";
+        //    var origin = $"{Request.Scheme}://{Request.Host}";
 
-            var session = await _paymentService.Test(origin);
+        //    //var session = await _paymentService.Test(origin);
 
-            return Ok(new { redirectUrl = session.Url });
-        }
+        //    return Ok(new { redirectUrl = "session.Url "});
+        //}
 
         //[HttpGet("success")]
         //public async Task<IActionResult> Success(string sessionId)

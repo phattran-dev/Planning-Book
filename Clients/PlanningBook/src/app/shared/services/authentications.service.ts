@@ -14,7 +14,7 @@ export class AuthenticationService {
 
     signUp(request: SignUpRequest): Observable<BaseResult<string>> {
         return this.#http
-            .post<BaseResult<string>>(`${API_ENDPOINTS.AUTHENTICATION}/sign-up`, request)
+            .post<BaseResult<string>>(`${mainUrl}/sign-up`, request)
             .pipe(catchError(err => {
                 console.log(err);
                 return of();
@@ -23,7 +23,7 @@ export class AuthenticationService {
 
     signIn(request: SignInRequest): Observable<BaseResult<SignInResponse>> {
         return this.#http
-            .post<BaseResult<SignInResponse>>(`${API_ENDPOINTS.AUTHENTICATION}/sign-in`, request)
+            .post<BaseResult<SignInResponse>>(`${mainUrl}/sign-in`, request)
             .pipe(catchError(err => {
                 console.log(err);
                 return of();
