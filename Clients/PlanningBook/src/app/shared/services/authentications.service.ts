@@ -6,7 +6,9 @@ import { SignInRequest, SignInResponse, SignUpRequest } from "../models/authenti
 import { API_ENDPOINTS } from "../constants/url.constant";
 
 export const mainUrl = `${API_ENDPOINTS.AUTHENTICATION}/identity`
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class AuthenticationService {
     #http = inject(HttpClient);
 
@@ -26,5 +28,9 @@ export class AuthenticationService {
                 console.log(err);
                 return of();
             }));
+    }
+
+    test() {
+        console.log('HUIT');
     }
 }

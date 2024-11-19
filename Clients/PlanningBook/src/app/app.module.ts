@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './features/general/pages/page-not-found/page-not-found.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { CommonModule } from '@angular/common';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -13,12 +15,14 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     PageNotFoundComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     RouterModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient()
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../../../shared/services/authentications.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-in',
@@ -8,7 +10,12 @@ import { Router } from '@angular/router';
 })
 export class SignInComponent implements OnInit {
   #router = inject(Router);
-  #
+  #authenticationService = inject(AuthenticationService);
+
+  signInForm = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl('')
+  });
 
   ngOnInit(): void {
   }
@@ -19,7 +26,9 @@ export class SignInComponent implements OnInit {
   }
 
   onSignIn() {
-    console.log('Hit');
+    // console.log('Hit');
+    // this.#authenticationService.signIn();
+    console.log(this.signInForm.value);
     this.#router.navigateByUrl('/planning-books');
   }
 }

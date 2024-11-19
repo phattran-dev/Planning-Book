@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { AuthenticationService } from '../../shared/services/auhentications.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,12 +25,12 @@ import { AuthenticationService } from '../../shared/services/auhentications.serv
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     AuthenticationsRoutingModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule,
-    AuthenticationService
+    MatIconModule
   ]
 })
 export class AuthenticationsModule { }

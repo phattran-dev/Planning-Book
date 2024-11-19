@@ -5,18 +5,18 @@
              src="your-logo.png"
              alt="Logo">
         <h2>Sign in to your account</h2>
-        <form>
+        <form [formGroup]="signInForm">
             <mat-form-field appearance="outline">
-                <mat-label>Email</mat-label>
+                <mat-label>Username</mat-label>
                 <input matInput
-                       type="email"
-                       placeholder="designer@example.com"
+                       formControlName="username"
                        tabindex="0">
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
                 <input matInput
+                       formControlName="password"
                        type="password"
                        placeholder="password"
                        tabindex="1"
