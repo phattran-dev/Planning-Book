@@ -11,7 +11,7 @@ namespace PlanningBook.Themes.API.Controllers
     public class PaymentController(StripePaymentService _paymentService) : ControllerBase
     {
         [HttpPost("create-checkout-session")]
-        public async Task<ActionResult> CreateCheckoutSession()
+        public async Task<ActionResult> CreateCheckoutSession([FromBody] )
         {
             //var session = _paymentService.CreateCheckoutSession(
             //   "https://yourdomain.com/payment/success?sessionId={CHECKOUT_SESSION_ID}",

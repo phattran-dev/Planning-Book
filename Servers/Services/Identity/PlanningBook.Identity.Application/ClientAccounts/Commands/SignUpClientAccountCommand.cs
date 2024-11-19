@@ -61,10 +61,11 @@ namespace PlanningBook.Identity.Application.Accounts.Commands
             //    .FirstOrDefaultAsync(x => x.UserName == command.Username &&
             //    x.);
 
-            if (!string.IsNullOrWhiteSpace(command.Email))
+            var tempEmail = command?.Email ?? $"{command.Username}@mail.com";
+            if (!string.IsNullOrWhiteSpace(tempEmail))
             {
                 var isEmailUsed = await _accountManager.Users
-                    .AnyAsync(account => account.Email == command.Email &&
+                    .AnyAsync(account => account.Email == tempEmail &&
                         account.IsActive &&
                         !account.IsDeleted, cancellationToken);
                 if (isEmailUsed)
@@ -90,7 +91,7 @@ namespace PlanningBook.Identity.Application.Accounts.Commands
 
             var accountExisted = await _accountManager.Users
                 .AnyAsync(account => account.UserName == command.Username
-                && account.Email == command.Email
+                && account.Email == tempEmail
                 && account.PhoneNumber == command.PhoneNumber
                 && account.IsActive
                 && !account.IsDeleted, cancellationToken);
@@ -110,9 +111,9 @@ namespace PlanningBook.Identity.Application.Accounts.Commands
             {
                 UserName = command.Username,
                 NormalizedUserName = command.Username.ToUpper(),
-                Email = command.Email,
-                NormalizedEmail = command?.Email?.ToUpper(),
-                PhoneNumber = command?.PhoneNumber,
+                Email = tempEmail,
+                NormalizedEmail = tempEmail.ToUpper(),
+                PhoneNumber = command?.PhoneNumber ?? null,
                 PasswordHash = passwordHash,
                 IsDeleted = false,
                 IsActive = true

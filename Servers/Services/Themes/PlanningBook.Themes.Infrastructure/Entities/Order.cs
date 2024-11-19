@@ -10,5 +10,6 @@ namespace PlanningBook.Themes.Infrastructure.Entities
         public DateTime? UpdatedDate { get; set; }
         public Guid CreatedBy { get; set; }
         public Guid UpdatedBy { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 }

@@ -30,5 +30,13 @@ namespace PlanningBook.Users.API.Controllers
             else
                 return BadRequest(result);
         }
+
+        [HttpGet]
+        public async Task<ActionResult<string>> GetPerson()
+        {
+            var user = User.Identity;
+
+            return Ok("Test");
+        }
     }
 }
