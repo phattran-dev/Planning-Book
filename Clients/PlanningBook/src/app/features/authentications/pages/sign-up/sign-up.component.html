@@ -5,21 +5,12 @@
              src="your-logo.png"
              alt="Logo">
         <h2>Create new account</h2>
-        <form>
+        <form [formGroup]="signUpForm">
             <mat-form-field appearance="outline">
-                <mat-label>Full name</mat-label>
+                <mat-label>Username</mat-label>
                 <input matInput
-                       type="email"
-                       placeholder="designer@example.com"
+                       formControlName="username"
                        tabindex="0">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Email</mat-label>
-                <input matInput
-                       type="email"
-                       placeholder="designer@example.com"
-                       tabindex="1">
             </mat-form-field>
 
             <mat-form-field appearance="outline">
@@ -27,6 +18,26 @@
                 <input matInput
                        type="password"
                        placeholder="password"
+                       formControlName="password"
+                       tabindex="2"
+                       [type]="hide() ? 'password' : 'text'">
+                <button mat-icon-button
+                        matSuffix
+                        tabindex="3"
+                        type="button"
+                        [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide()"
+                        (click)="togglePasswordVisibility()">
+                    <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput
+                       type="password"
+                       placeholder="confirm password"
+                       formControlName="confirmPassword"
                        tabindex="2"
                        [type]="hide() ? 'password' : 'text'">
                 <button mat-icon-button

@@ -43,6 +43,7 @@ export class SignInComponent implements OnInit {
         console.log('SignIn Error 1');
       }
     }, catchError(err => {
+      console.log('SignIn Error 2');
       console.log(err);
       return of();
     }));
