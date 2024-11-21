@@ -1,0 +1,117 @@
+#isFilterSettingExisted(fieldName: string, filterSettings: any[]) {
+    if (!filterSettings || filterSettings.length === 0) {
+      return false;
+    }
+
+    for (let index = 0; index < filterSettings.length; index++) {
+      const item = filterSettings[index];
+      const isFilterSetting = Array.isArray(item);
+      if (isFilterSetting) {
+        if (typeof item[0] === 'string' && item[0] === fieldName) {
+          return true;
+        }
+
+        const isGroupFilterSetting = Array.isArray(item[0]);
+        if (isGroupFilterSetting) {
+          if (this.#isFilterSettingExisted(fieldName, item[0])) {
+            return true;
+          }
+        }
+
+        if (this.#isFilterSettingExisted(fieldName, item)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  #getFieldFilterSettingByName(fieldName: string, filterSettings: any[]) {
+    if (!filterSettings || filterSettings.length === 0) {
+      return null;
+    }
+
+    for (let index = 0; index < filterSettings.length; index++) {
+      const item = filterSettings[index];
+      const isFilterSetting = Array.isArray(item);
+      if (isFilterSetting) {
+        if (typeof item[0] === 'string' && item[0] === fieldName) {
+          return item;
+        }
+
+        const isGroupFilterSetting = Array.isArray(item[0]);
+        if (isGroupFilterSetting) {
+          if (this.#getFieldFilterSettingByName(fieldName, item[0])) {
+            return item[0];
+          }
+        }
+
+        if (this.#getFieldFilterSettingByName(fieldName, item)) {
+          return item;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  #getMaxDepthGroupOfFilterSettings(filterSettings?: any[]): number {
+    if (
+      !filterSettings ||
+      !Array.isArray(filterSettings) ||
+      filterSettings.length === 0
+    ) {
+      return 0;
+    }
+
+    let maxDepth = 0;
+
+    for (const item of filterSettings) {
+      if (Array.isArray(item) && item.length > 0) {
+        if (Array.isArray(item[0])) {
+          maxDepth = Math.max(
+            maxDepth,
+            this.#getMaxDepthGroupOfFilterSettings(item) + 1
+          );
+        }
+      }
+    }
+
+    return maxDepth;
+  }
+
+  #getAllFilterFields(filterSettings?: any[]): any[] {
+    const fields: any[] = [];
+
+    if (
+      !filterSettings ||
+      !Array.isArray(filterSettings) ||
+      filterSettings.length === 0
+    ) {
+      return fields;
+    }
+
+    if (!Array.isArray(filterSettings[0])) {
+      fields.push(filterSettings);
+      return fields;
+    }
+
+    for (const item of filterSettings) {
+      if (Array.isArray(item)) {
+        const isStandAlone = typeof item[0] === 'string';
+
+        if (isStandAlone) {
+          fields.push(item);
+          continue;
+        }
+
+        const isGroupFilter = Array.isArray(item[0]);
+        if (isGroupFilter) {
+          fields.push(...this.#getAllFilterFields(item));
+        }
+      }
+    }
+
+    return fields;
+  }

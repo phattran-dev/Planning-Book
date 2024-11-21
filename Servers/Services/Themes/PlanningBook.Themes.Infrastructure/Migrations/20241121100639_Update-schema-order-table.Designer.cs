@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlanningBook.Themes.Infrastructure;
 
@@ -11,9 +12,11 @@ using PlanningBook.Themes.Infrastructure;
 namespace PlanningBook.Themes.Infrastructure.Migrations
 {
     [DbContext(typeof(PBThemeDbContext))]
-    partial class PBThemeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241121100639_Update-schema-order-table")]
+    partial class Updateschemaordertable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -142,32 +145,6 @@ namespace PlanningBook.Themes.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SubscriptionPlans", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("371cffea-2b1e-4c4d-aec8-cffd1ae43fef"),
-                            Description = "Basic",
-                            Name = "Basic",
-                            Price = 150m,
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("b677c4c6-669b-43ca-9897-83b5cb1c0cd9"),
-                            Description = "Elite",
-                            Name = "Elite",
-                            Price = 294m,
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("1fc13c2a-27e8-45cb-95dd-9dfd924db840"),
-                            Description = "Lifetime",
-                            Name = "Lifetime",
-                            Price = 710m,
-                            Type = 0
-                        });
                 });
 
             modelBuilder.Entity("PlanningBook.Themes.Infrastructure.Entities.Theme", b =>
@@ -189,29 +166,6 @@ namespace PlanningBook.Themes.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Themes", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("835bc37f-8891-48da-9f01-4bfcbf50ab13"),
-                            Description = "Black",
-                            Name = "Black",
-                            Price = 150m
-                        },
-                        new
-                        {
-                            Id = new Guid("27784869-292e-47e8-be5f-311d7a4aaf14"),
-                            Description = "White",
-                            Name = "White",
-                            Price = 250m
-                        },
-                        new
-                        {
-                            Id = new Guid("eea6122c-c5d8-40f1-a44a-766008241255"),
-                            Description = "Rain",
-                            Name = "Rain",
-                            Price = 400m
-                        });
                 });
 
             modelBuilder.Entity("PlanningBook.Themes.Infrastructure.Entities.UserPaymentMethod", b =>

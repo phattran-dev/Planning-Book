@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlanningBook.Themes.Infrastructure;
 
@@ -11,9 +12,11 @@ using PlanningBook.Themes.Infrastructure;
 namespace PlanningBook.Themes.Infrastructure.Migrations
 {
     [DbContext(typeof(PBThemeDbContext))]
-    partial class PBThemeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241121191234_Add_seed_data")]
+    partial class Add_seed_data
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -208,8 +211,8 @@ namespace PlanningBook.Themes.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("eea6122c-c5d8-40f1-a44a-766008241255"),
-                            Description = "Rain",
-                            Name = "Rain",
+                            Description = "Black",
+                            Name = "Black",
                             Price = 400m
                         });
                 });
