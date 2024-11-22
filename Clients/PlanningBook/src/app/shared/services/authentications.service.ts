@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { catchError, Observable, of } from "rxjs";
 import { BaseResult } from "../models/general.model";
@@ -30,7 +30,12 @@ export class AuthenticationService {
             }));
     }
 
-    test() {
-        console.log('HUIT');
+    test(): Observable<any> {
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            Authorization: `Bearer ${token}`,
+        });
+        // return this.#http.get<any>(`${API_ENDPOINTS.AUTHENTICATION}/api/HealthCheck/NonAuth`);
+        return this.#http.get<any>(`${API_ENDPOINTS.AUTHENTICATION}/api/HealthCheck/HasAuth`, { headers });
     }
 }

@@ -42,9 +42,6 @@ export class SignUpComponent {
 
     this.#authenticationService.signUp(signUpRequest).subscribe(res => {
       if (res.isSuccess && res.data) {
-        // localStorage.setItem('token', res.data?.token);
-        // localStorage.setItem('refresh-token', res.data?.refreshToken);
-        // localStorage.setItem('userId', res.data?.userId);
         this.#router.navigateByUrl('/sign-in');
       } else {
         console.log('SignIn Error 2');

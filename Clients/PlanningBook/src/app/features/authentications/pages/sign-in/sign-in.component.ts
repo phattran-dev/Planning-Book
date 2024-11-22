@@ -37,7 +37,8 @@ export class SignInComponent implements OnInit {
       if (res.isSuccess && res.data) {
         localStorage.setItem('token', res.data?.token);
         localStorage.setItem('refresh-token', res.data?.refreshToken);
-        localStorage.setItem('userId', res.data?.userId);
+        localStorage.setItem('user-id', res.data?.userId);
+        localStorage.setItem('username', signInRequest.userName);
         this.#router.navigateByUrl('/planning-books');
       } else {
         console.log('SignIn Error 1');

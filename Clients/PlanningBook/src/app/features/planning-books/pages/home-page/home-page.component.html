@@ -90,7 +90,15 @@
         </div>
     </div>
     <div class="footer">
-        <button class="corner-btn"></button>
+        <div class="theme-list">
+            <button class="corner-btn theme-one"
+                    (click)="buyTheme(0)"></button>
+            <button class="corner-btn theme-two"
+                    (click)="buyTheme(1)"></button>
+            <button class="corner-btn theme-three"
+                    (click)="buyTheme(2)"></button>
+        </div>
+
         <button class="corner-btn"
                 (click)="onMembership()"><i class="fas fa-shopping-cart fa-lg"
                style="color: #ffffff;"></i></button>

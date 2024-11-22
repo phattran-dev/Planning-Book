@@ -7,11 +7,11 @@ import { Router } from '@angular/router';
   styleUrl: './paid-memberships.component.scss'
 })
 export class PaidMembershipsComponent implements OnInit {
-
   #router = inject(Router);
 
+  username = '';
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.username = localStorage.getItem('username') ?? '';
   }
 
   onBackHomePage() {
