@@ -8,22 +8,19 @@ import { PageNotFoundComponent } from './features/general/pages/page-not-found/p
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { CommonModule } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
+import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PageNotFoundComponent,
-  ],
+  declarations: [AppComponent, PageNotFoundComponent],
   imports: [
     CommonModule,
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    MatDialogModule,
   ],
-  providers: [
-    provideAnimationsAsync(),
-    provideHttpClient()
-  ],
-  bootstrap: [AppComponent]
+  providers: [provideAnimationsAsync(), provideHttpClient()],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
