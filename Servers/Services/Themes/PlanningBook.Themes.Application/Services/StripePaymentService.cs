@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
 using PlanningBook.Themes.Application.Models;
-using PlanningBook.Themes.Infrastructure.Entities;
 using Stripe;
 using Stripe.Checkout;
 
@@ -21,8 +20,8 @@ namespace PlanningBook.Themes.Application.Services
             {
                 Mode = "payment",
                 ClientReferenceId = Guid.NewGuid().ToString(),
-                SuccessUrl = $"{originUrl}/confirmation?orderId={orderId}",
-                CancelUrl = $"{originUrl}/cancel?orderId={orderId}",
+                SuccessUrl = $"{originUrl}/planning-books/confirmation?orderId={orderId}",
+                CancelUrl = $"{originUrl}/planning-books/cancel?orderId={orderId}",
                 CustomerEmail = "phattrandev@gmail.com",
                 LineItems = new()
                     {
