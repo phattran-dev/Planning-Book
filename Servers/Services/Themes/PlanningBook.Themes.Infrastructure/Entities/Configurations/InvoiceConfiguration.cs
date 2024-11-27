@@ -3,9 +3,9 @@ using PlanningBook.DBEngine;
 
 namespace PlanningBook.Themes.Infrastructure.Entities.Configurations
 {
-    public class UserPaymentMethodConfiguration : BaseRelationDbEntityTypeConfiguration<UserPaymentMethod>
+    public class InvoiceConfiguration : BaseRelationDbEntityTypeConfiguration<Invoice>
     {
-        public override void Configure(EntityTypeBuilder<UserPaymentMethod> builder)
+        public override void Configure(EntityTypeBuilder<Invoice> builder)
         {
             base.Configure(builder);
         }

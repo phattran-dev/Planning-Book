@@ -3,9 +3,9 @@ using PlanningBook.DBEngine;
 
 namespace PlanningBook.Themes.Infrastructure.Entities.Configurations
 {
-    public class OrderConfiguration : BaseRelationDbEntityTypeConfiguration<Order>
+    public class InvoiceDetailConfiguration : BaseRelationDbEntityTypeConfiguration<InvoiceDetail>
     {
-        public override void Configure(EntityTypeBuilder<Order> builder)
+        public override void Configure(EntityTypeBuilder<InvoiceDetail> builder)
         {
             base.Configure(builder);
         }

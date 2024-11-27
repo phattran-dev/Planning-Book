@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\Presitance\Planning_book.Repository.EF\PlanningBook.Repository.EF.csproj" />
+    <ProjectReference Include="..\..\..\Frameworks\PlanningBook.Extensions\PlanningBook.Extensions.csproj" />
     <ProjectReference Include="..\PlanningBook.Themes.Application\PlanningBook.Themes.Application.csproj" />
     <ProjectReference Include="..\PlanningBook.Themes.Infrastructure\PlanningBook.Themes.Infrastructure.csproj" />
   </ItemGroup>

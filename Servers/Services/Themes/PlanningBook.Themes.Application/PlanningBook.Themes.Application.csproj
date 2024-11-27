@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\UserPaymentMethods\Commands\" />
+    <Folder Include="Domain\Invoices\Commands\Models\" />
   </ItemGroup>
 
 </Project>
