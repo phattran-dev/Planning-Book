@@ -2,10 +2,10 @@
 
 namespace PlanningBook.Themes.Infrastructure.Entities
 {
-    public class CustomerStripe : EntityBase<Guid>
+    public class StripeCustomer : EntityBase<Guid>
     {
         public Guid UserId { get; set; }
         public string StripeCustomerId { get; set; }
-        public string StripePaymentMethodId { get; set; }
+        public string? StripePaymentMethodId { get; set; }
     }
 }

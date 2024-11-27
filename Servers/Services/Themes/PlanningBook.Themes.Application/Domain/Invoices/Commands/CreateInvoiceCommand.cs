@@ -24,7 +24,7 @@ namespace PlanningBook.Themes.Application.Domain.Invoices.Commands
     public class CreateInvoiceCommandHandler(
         IEFRepository<PBThemeDbContext, Invoice, Guid> _invoiceRepository,
         IEFRepository<PBThemeDbContext, Product, Guid> _productRepository,
-        IEFRepository<PBThemeDbContext, CustomerStripe, Guid> _customerStripeRepository,
+        IEFRepository<PBThemeDbContext, StripeCustomer, Guid> _customerStripeRepository,
         StripePaymentService _stripePaymentService) : ICommandHandler<CreateInvoiceCommand, CommandResult<string>>
     {
         public async Task<CommandResult<string>> HandleAsync(CreateInvoiceCommand command, CancellationToken cancellationToken = default)

@@ -63,6 +63,23 @@ namespace PlanningBook.Themes.Application.Services
             return stripeCheckoutSession.Url;
         }
 
+        public async Task<string> CreateCustomerAsync(Guid userId)
+        {
+            var customerService = new CustomerService();
+
+            var options = new CustomerCreateOptions()
+            {
+                Name = userId.ToString(),
+                Email = $"test{userId.ToString().Replace("-", "")}@mail.com"
+            };
+
+            var customer = await customerService.CreateAsync(options);
+            if (customer != null)
+                return customer.Id;
+
+            return string.Empty;
+        }
+
         public async Task<Session> CheckoutAsync(string originUrl, Guid orderId, decimal price)
         {
             var stripeSessionService = new SessionService();

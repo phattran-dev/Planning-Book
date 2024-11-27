@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace PlanningBook.Themes.Infrastructure.Entities.Configurations
 {
-    public class CustomerStripeConfiguration : BaseRelationDbEntityTypeConfiguration<CustomerStripe>
+    public class StripeCustomerConfiguration : BaseRelationDbEntityTypeConfiguration<StripeCustomer>
     {
-        public override void Configure(EntityTypeBuilder<CustomerStripe> builder)
+        public override void Configure(EntityTypeBuilder<StripeCustomer> builder)
         {
             base.Configure(builder);
         }
