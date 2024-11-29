@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using PlanningBook.Domain;
 using PlanningBook.Domain.Interfaces;
@@ -8,7 +7,6 @@ using PlanningBook.Themes.Application.Domain.Invoices.Commands;
 
 namespace PlanningBook.Themes.API.Controllers
 {
-    //[EnableCors("AllowSpecificOrigins")]
     [Route("[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = "Bearer")]

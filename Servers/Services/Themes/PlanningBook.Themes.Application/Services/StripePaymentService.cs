@@ -10,7 +10,7 @@ namespace PlanningBook.Themes.Application.Services
     {
         public StripePaymentService(IOptions<StripeSettings> stripeSettings)
         {
-            StripeConfiguration.ApiKey = stripeSettings.Value.SecretKey;
+            //StripeConfiguration.ApiKey = stripeSettings.Value.SecretKey;
         }
 
         public async Task<string> CheckoutSessionAsync(string originUrl, Guid invoiceId, ProductType productType, decimal price, string? stripePriceId = null, string? stripeProductId = null)
@@ -78,6 +78,61 @@ namespace PlanningBook.Themes.Application.Services
                 return customer.Id;
 
             return string.Empty;
+        }
+
+        public async Task<string> CreatePaymentMethodAsync(string byPassToken)
+        {
+            // By Pass Token Using for Demo only
+            var options = new PaymentMethodCreateOptions();
+            if (string.IsNullOrWhiteSpace(byPassToken))
+            {
+                // Demo show error cant not direcly send card/payment infor from our server to Stripe. Need use Stripe.js to implement this workflow
+                options = new PaymentMethodCreateOptions()
+                {
+                    Type = "card",
+                    Card = new PaymentMethodCardOptions()
+                    {
+                        Number = "4242424242424242",
+                        ExpMonth = 12,
+                        ExpYear = 28,
+                        Cvc = "767"
+                    }
+                };
+            }
+            else
+            {
+                options = new PaymentMethodCreateOptions()
+                {
+                    Type = "card",
+                    Card = new PaymentMethodCardOptions()
+                    {
+                        Token = byPassToken
+                    }
+                };
+            }
+
+            var paymentMethodService = new PaymentMethodService();
+            var paymentMethod = await paymentMethodService.CreateAsync(options);
+
+            return paymentMethod.Id;
+        }
+
+        public async Task AttachPaymentMethodAsync(string customerStripeId, string paymentMethodId)
+        {
+            var service = new PaymentMethodService();
+
+            var options = new PaymentMethodAttachOptions()
+            {
+                Customer = customerStripeId
+            };
+
+            await service.AttachAsync(paymentMethodId, options);
+        }
+
+        public async Task DetachPaymentMethodAsync(string paymentMethodId)
+        {
+            var service = new PaymentMethodService();
+            await service.DetachAsync(paymentMethodId);
         }
 
         public async Task<Session> CheckoutAsync(string originUrl, Guid orderId, decimal price)

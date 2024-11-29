@@ -4,6 +4,9 @@ using PlanningBook.Repository.EF;
 using PlanningBook.Themes.Application.Domain.Invoices.Commands;
 using PlanningBook.Themes.Application.Domain.Invoices.Queries;
 using PlanningBook.Themes.Application.Domain.Invoices.Queries.Models;
+using PlanningBook.Themes.Application.Domain.StripeCustomers.Commands;
+using PlanningBook.Themes.Application.Domain.StripeCustomers.Queries;
+using PlanningBook.Themes.Infrastructure.Entities;
 
 namespace PlanningBook.Themes.API.Extensions
 {
@@ -31,12 +34,22 @@ namespace PlanningBook.Themes.API.Extensions
         public static IServiceCollection RegistryThemeModule(this IServiceCollection services, IConfiguration configuration)
         {
             #region Commands
+            // Invoices
             services.AddScoped<ICommandHandler<CreateInvoiceCommand, CommandResult<string>>, CreateInvoiceCommandHandler>();
             services.AddScoped<ICommandHandler<UpdateInvoiceCommand, CommandResult<Guid>>, UpdateInvoiceCommandHandler>();
+
+            // Stripe Customer - Payment Method
+            services.AddScoped<ICommandHandler<CreateStripeCustomerCommand, CommandResult<string>>, CreateStripeCustomerCommandHandler>();
+            services.AddScoped<ICommandHandler<CreateCustomerPaymentMethodCommand, CommandResult<string>>, CreateCustomerPaymentMethodCommandHandler>();
+            services.AddScoped<ICommandHandler<UpdateStripeCustomerCommand, CommandResult<StripeCustomer>>, UpdateStripeCustomerCommandHandler>();
             #endregion Commands
 
             #region Queries
+            // Invoices
             services.AddScoped<IQueryHandler<GetUserInvoicesQuery, QueryResult<List<UserInvoiceModel>>>, GetUserInvoicesQueryHandler>();
+
+            // Stripe Customer - Payment method
+            services.AddScoped<IQueryHandler<GetUserStripeCustomerQuery, QueryResult<StripeCustomer>>, GetUserStripeCustomerQueryHandler>();
             #endregion Queries
             return services;
         }
