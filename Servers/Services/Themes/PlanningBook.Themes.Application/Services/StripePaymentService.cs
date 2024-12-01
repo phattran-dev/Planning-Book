@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-using PlanningBook.Themes.Application.Models;
-using PlanningBook.Themes.Infrastructure.Entities.Enums;
+﻿using PlanningBook.Themes.Infrastructure.Entities.Enums;
 using Stripe;
 using Stripe.Checkout;
 
@@ -8,12 +6,18 @@ namespace PlanningBook.Themes.Application.Services
 {
     public class StripePaymentService
     {
-        public StripePaymentService(IOptions<StripeSettings> stripeSettings)
+        private readonly SessionService _sessionService;
+        private readonly CustomerService _customerService;
+        private readonly PaymentMethodService _paymentMethodService;
+        public StripePaymentService()
         {
+            _sessionService = new SessionService();
+            _customerService = new CustomerService();
+            _paymentMethodService = new PaymentMethodService();
             //StripeConfiguration.ApiKey = stripeSettings.Value.SecretKey;
         }
 
-        public async Task<string> CheckoutSessionAsync(string originUrl, Guid invoiceId, ProductType productType, decimal price, string? stripePriceId = null, string? stripeProductId = null)
+        public async Task<Session> CheckoutSessionAsync(string originUrl, Guid invoiceId, ProductType productType, decimal price, string? stripePriceId = null, string? stripeProductId = null)
         {
             var mode = productType == ProductType.SubcriptionPlan ? "subscription" : "payment";
             var successUrl = $"{originUrl}/planning-books/success?invoiceId={invoiceId}";
@@ -57,23 +61,20 @@ namespace PlanningBook.Themes.Application.Services
                 Metadata = metadata
             };
 
-            var stripeSessionService = new SessionService();
-            var stripeCheckoutSession = await stripeSessionService.CreateAsync(checkoutSessionOptions);
+            var stripeCheckoutSession = await _sessionService.CreateAsync(checkoutSessionOptions);
 
-            return stripeCheckoutSession.Url;
+            return stripeCheckoutSession;
         }
 
         public async Task<string> CreateCustomerAsync(Guid userId)
         {
-            var customerService = new CustomerService();
-
             var options = new CustomerCreateOptions()
             {
                 Name = userId.ToString(),
                 Email = $"test{userId.ToString().Replace("-", "")}@mail.com"
             };
 
-            var customer = await customerService.CreateAsync(options);
+            var customer = await _customerService.CreateAsync(options);
             if (customer != null)
                 return customer.Id;
 
@@ -110,61 +111,24 @@ namespace PlanningBook.Themes.Application.Services
                     }
                 };
             }
-
-            var paymentMethodService = new PaymentMethodService();
-            var paymentMethod = await paymentMethodService.CreateAsync(options);
+            var paymentMethod = await _paymentMethodService.CreateAsync(options);
 
             return paymentMethod.Id;
         }
 
         public async Task AttachPaymentMethodAsync(string customerStripeId, string paymentMethodId)
         {
-            var service = new PaymentMethodService();
-
             var options = new PaymentMethodAttachOptions()
             {
                 Customer = customerStripeId
             };
 
-            await service.AttachAsync(paymentMethodId, options);
+            await _paymentMethodService.AttachAsync(paymentMethodId, options);
         }
 
         public async Task DetachPaymentMethodAsync(string paymentMethodId)
         {
-            var service = new PaymentMethodService();
-            await service.DetachAsync(paymentMethodId);
-        }
-
-        public async Task<Session> CheckoutAsync(string originUrl, Guid orderId, decimal price)
-        {
-            var stripeSessionService = new SessionService();
-
-            var stripeCheckoutSession = await stripeSessionService.CreateAsync(new SessionCreateOptions
-            {
-                Mode = "payment",
-                ClientReferenceId = Guid.NewGuid().ToString(),
-                SuccessUrl = $"{originUrl}/planning-books/confirmation?orderId={orderId}",
-                CancelUrl = $"{originUrl}/planning-books/cancel?orderId={orderId}",
-                CustomerEmail = "phattrandev@gmail.com",
-                LineItems = new()
-                    {
-                        new()
-                        {
-                            PriceData = new()
-                            {
-                                Currency = "USD",
-                                ProductData = new()
-                                {
-                                    Name = $"{orderId}"
-                                },
-                                UnitAmountDecimal = price
-                            },
-                            Quantity = 1
-                        }
-                    }
-            });
-
-            return stripeCheckoutSession;
+            await _paymentMethodService.DetachAsync(paymentMethodId);
         }
     }
 }

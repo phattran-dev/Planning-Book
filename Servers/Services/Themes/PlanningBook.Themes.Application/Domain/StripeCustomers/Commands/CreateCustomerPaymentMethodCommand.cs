@@ -29,7 +29,7 @@ namespace PlanningBook.Themes.Application.Domain.StripeCustomers.Commands
                 return CommandResult<string>.Failure("Customer is not existed");
             }
 
-            if(string.IsNullOrWhiteSpace(customerExisted.StripeCustomerId))
+            if (string.IsNullOrWhiteSpace(customerExisted.StripeCustomerId))
             {
                 var customerStripe = await _stripeService.CreateCustomerAsync(command.UserId);
                 if(customerStripe == null)

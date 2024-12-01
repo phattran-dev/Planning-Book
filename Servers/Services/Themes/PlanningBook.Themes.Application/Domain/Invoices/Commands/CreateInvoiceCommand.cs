@@ -5,10 +5,12 @@ using PlanningBook.Themes.Infrastructure;
 using PlanningBook.Themes.Infrastructure.Entities;
 using PlanningBook.Themes.Application.Services;
 using PlanningBook.Themes.Infrastructure.Entities.Enums;
+using PlanningBook.Themes.Application.Domain.Invoices.Commands.Models;
+using Stripe.Checkout;
 
 namespace PlanningBook.Themes.Application.Domain.Invoices.Commands
 {
-    public sealed class CreateInvoiceCommand : ICommand<CommandResult<string>>
+    public sealed class CreateInvoiceCommand : ICommand<CommandResult<CreateInvoiceCommandResult>>
     {
         public string OriginUrl { get; set; }
         public Guid ProductId { get; set; }
@@ -25,17 +27,17 @@ namespace PlanningBook.Themes.Application.Domain.Invoices.Commands
         IEFRepository<PBThemeDbContext, Invoice, Guid> _invoiceRepository,
         IEFRepository<PBThemeDbContext, Product, Guid> _productRepository,
         IEFRepository<PBThemeDbContext, StripeCustomer, Guid> _customerStripeRepository,
-        StripePaymentService _stripePaymentService) : ICommandHandler<CreateInvoiceCommand, CommandResult<string>>
+        StripePaymentService _stripePaymentService) : ICommandHandler<CreateInvoiceCommand, CommandResult<CreateInvoiceCommandResult>>
     {
-        public async Task<CommandResult<string>> HandleAsync(CreateInvoiceCommand command, CancellationToken cancellationToken = default)
+        public async Task<CommandResult<CreateInvoiceCommandResult>> HandleAsync(CreateInvoiceCommand command, CancellationToken cancellationToken = default)
         {
             var userExisted = await _customerStripeRepository.GetFirstAsync(x => x.UserId == command.UserId, cancellationToken);
             if (userExisted == null)
-                return CommandResult<string>.Failure("User Not Existed");
+                return CommandResult<CreateInvoiceCommandResult>.Failure("User Not Existed");
 
             var productExited = await _productRepository.GetFirstAsync(x => x.Id == command.ProductId, cancellationToken);
             if (productExited == null)
-                return CommandResult<string>.Failure("Product Not Existed");
+                return CommandResult<CreateInvoiceCommandResult>.Failure("Product Not Existed");
 
             var invoice = new Invoice()
             {
@@ -50,13 +52,28 @@ namespace PlanningBook.Themes.Application.Domain.Invoices.Commands
             await _invoiceRepository.SaveChangeAsync(cancellationToken);
 
             var actualyProductPrice = command.Price ?? productExited.Price;
-            var urlCheckout = "";
+            Session session = null;
             if (command.IsUseStripePrice)
-                urlCheckout = await _stripePaymentService.CheckoutSessionAsync(command.OriginUrl, invoice.Id, productExited.ProductType, 0, productExited.StripePriceId);
+                session = await _stripePaymentService.CheckoutSessionAsync(command.OriginUrl, invoice.Id, productExited.ProductType, 0, productExited.StripePriceId);
             else
-                urlCheckout = await _stripePaymentService.CheckoutSessionAsync(command.OriginUrl, invoice.Id, productExited.ProductType, actualyProductPrice);
-            
-            return CommandResult<string>.Success(urlCheckout);
+                session = await _stripePaymentService.CheckoutSessionAsync(command.OriginUrl, invoice.Id, productExited.ProductType, actualyProductPrice);
+
+            if(session != null)
+            {
+                var result = new CreateInvoiceCommandResult()
+                {
+                    InvoiceId = invoice.Id,
+                    StripeSessionId = session.Id,
+                    Mode = session.Mode,
+                    ActuallyAmountTotal = session.AmountSubtotal,
+                    AmountTotal = session.AmountTotal,
+                    Currency = session.Currency,
+                    Url = session.Url,
+                };
+                return CommandResult<CreateInvoiceCommandResult>.Success(result);
+            }
+
+            return CommandResult<CreateInvoiceCommandResult>.Failure("End Wrong!");
         }
     }
 }

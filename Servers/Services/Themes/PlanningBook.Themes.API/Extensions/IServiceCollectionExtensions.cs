@@ -2,6 +2,7 @@
 using PlanningBook.Domain.Interfaces;
 using PlanningBook.Repository.EF;
 using PlanningBook.Themes.Application.Domain.Invoices.Commands;
+using PlanningBook.Themes.Application.Domain.Invoices.Commands.Models;
 using PlanningBook.Themes.Application.Domain.Invoices.Queries;
 using PlanningBook.Themes.Application.Domain.Invoices.Queries.Models;
 using PlanningBook.Themes.Application.Domain.StripeCustomers.Commands;
@@ -35,7 +36,7 @@ namespace PlanningBook.Themes.API.Extensions
         {
             #region Commands
             // Invoices
-            services.AddScoped<ICommandHandler<CreateInvoiceCommand, CommandResult<string>>, CreateInvoiceCommandHandler>();
+            services.AddScoped<ICommandHandler<CreateInvoiceCommand, CommandResult<CreateInvoiceCommandResult>>, CreateInvoiceCommandHandler>();
             services.AddScoped<ICommandHandler<UpdateInvoiceCommand, CommandResult<Guid>>, UpdateInvoiceCommandHandler>();
 
             // Stripe Customer - Payment Method
