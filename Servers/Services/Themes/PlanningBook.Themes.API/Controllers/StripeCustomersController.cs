@@ -45,5 +45,27 @@ namespace PlanningBook.Themes.API.Controllers
             else
                 return BadRequest(result);
         }
+
+        [HttpPost("cancel-subscription")]
+        public async Task<ActionResult<CommandResult<bool>>> CancelSubscriptionAsync([FromBody] CancelSubscriptionCommand command)
+        {
+            var result = await _commandExecutor.ExecuteAsync(command);
+
+            if (result.IsSuccess)
+                return Ok(result);
+            else
+                return BadRequest(result);
+        }
+
+        //[HttpPost("resume-subscription")]
+        //public async Task<ActionResult<CommandResult<bool>>> ResumeSubscriptionAsync([FromBody] ResumeSubscriptionCommand command)
+        //{
+        //    var result = await _commandExecutor.ExecuteAsync(command);
+
+        //    if (result.IsSuccess)
+        //        return Ok(result);
+        //    else
+        //        return BadRequest(result);
+        //}
     }
 }

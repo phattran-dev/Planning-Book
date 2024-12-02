@@ -9,15 +9,18 @@ namespace PlanningBook.Themes.Application.Services
         private readonly SessionService _sessionService;
         private readonly CustomerService _customerService;
         private readonly PaymentMethodService _paymentMethodService;
+        private readonly SubscriptionService _subscriptionService;
+        private readonly PaymentIntentService _paymentIntentService;
         public StripePaymentService()
         {
             _sessionService = new SessionService();
             _customerService = new CustomerService();
             _paymentMethodService = new PaymentMethodService();
-            //StripeConfiguration.ApiKey = stripeSettings.Value.SecretKey;
+            _subscriptionService = new SubscriptionService();
+            _paymentIntentService = new PaymentIntentService();
         }
 
-        public async Task<Session> CheckoutSessionAsync(string originUrl, Guid invoiceId, ProductType productType, decimal price, string? stripePriceId = null, string? stripeProductId = null)
+        public async Task<Session> CheckoutSessionAsync(string originUrl, Guid userId, Guid invoiceId, ProductType productType, decimal price, string? stripePriceId = null, string? stripeProductId = null, string customerId = null)
         {
             var mode = productType == ProductType.SubcriptionPlan ? "subscription" : "payment";
             var successUrl = $"{originUrl}/planning-books/success?invoiceId={invoiceId}";
@@ -56,10 +59,22 @@ namespace PlanningBook.Themes.Application.Services
                 ClientReferenceId = Guid.NewGuid().ToString(),
                 SuccessUrl = successUrl,
                 CancelUrl = cancelUrl,
-                CustomerEmail = "phattrandev@gmail.com",
+                CustomerEmail = $"test{userId.ToString().Replace("-", "")}@mail.com",
                 LineItems = lineItems,
-                Metadata = metadata
+                Metadata = metadata,
+                AllowPromotionCodes = true,
             };
+
+            if(!string.IsNullOrWhiteSpace(customerId) && productType == ProductType.SubcriptionPlan)
+            {
+                checkoutSessionOptions.CustomerEmail = null;
+                checkoutSessionOptions.Customer = customerId;
+                checkoutSessionOptions.SavedPaymentMethodOptions = new SessionSavedPaymentMethodOptionsOptions()
+                {
+                    PaymentMethodSave = "enabled",
+                    AllowRedisplayFilters = new List<string>() { "always" }
+                };
+            }
 
             var stripeCheckoutSession = await _sessionService.CreateAsync(checkoutSessionOptions);
 
@@ -108,7 +123,8 @@ namespace PlanningBook.Themes.Application.Services
                     Card = new PaymentMethodCardOptions()
                     {
                         Token = byPassToken
-                    }
+                    },
+                    
                 };
             }
             var paymentMethod = await _paymentMethodService.CreateAsync(options);
@@ -129,6 +145,35 @@ namespace PlanningBook.Themes.Application.Services
         public async Task DetachPaymentMethodAsync(string paymentMethodId)
         {
             await _paymentMethodService.DetachAsync(paymentMethodId);
+        }
+
+        public async Task CancelSubscriptionsAsyn(string subscriptionId)
+        {
+            await _subscriptionService.CancelAsync(subscriptionId);
+        }
+
+        public async Task ResumeSubsriptionAsyn(string subscriptionId)
+        {
+            var options = new SubscriptionResumeOptions
+            {
+                BillingCycleAnchor = SubscriptionBillingCycleAnchor.Now,
+            };
+            await _subscriptionService.ResumeAsync(subscriptionId, options);
+        }
+
+        public async Task<PaymentIntent> CreatePaymentIntentAsync(string customerId, string paymentMethodId, long amount)
+        {
+            var options = new PaymentIntentCreateOptions()
+            {
+                Amount = amount,
+                Currency = "usd",
+                Customer = customerId,
+                PaymentMethod = paymentMethodId,
+                Confirm = true,
+                ConfirmationMethod = "automatic"
+            };
+
+            return await _paymentIntentService.CreateAsync(options);
         }
     }
 }

@@ -8,6 +8,7 @@ using PlanningBook.Themes.Application.Domain.Invoices.Queries.Models;
 using PlanningBook.Themes.Application.Domain.StripeCustomers.Commands;
 using PlanningBook.Themes.Application.Domain.StripeCustomers.Queries;
 using PlanningBook.Themes.Infrastructure.Entities;
+using Stripe;
 
 namespace PlanningBook.Themes.API.Extensions
 {
@@ -43,6 +44,9 @@ namespace PlanningBook.Themes.API.Extensions
             services.AddScoped<ICommandHandler<CreateStripeCustomerCommand, CommandResult<string>>, CreateStripeCustomerCommandHandler>();
             services.AddScoped<ICommandHandler<CreateCustomerPaymentMethodCommand, CommandResult<string>>, CreateCustomerPaymentMethodCommandHandler>();
             services.AddScoped<ICommandHandler<UpdateStripeCustomerCommand, CommandResult<StripeCustomer>>, UpdateStripeCustomerCommandHandler>();
+            services.AddScoped<ICommandHandler<CancelSubscriptionCommand, CommandResult<bool>>, CancelSubscriptionCommandHandler>();
+            services.AddScoped<ICommandHandler<ResumeSubscriptionCommand, CommandResult<bool>>, ResumeSubscriptionCommandHandler>();
+            services.AddScoped<ICommandHandler<CreatePaymentIntentCommand, CommandResult<bool>>, CreatePaymentIntentCommandHandler>();
             #endregion Commands
 
             #region Queries

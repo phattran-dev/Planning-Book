@@ -4,6 +4,7 @@ using PlanningBook.Domain;
 using PlanningBook.Domain.Interfaces;
 using PlanningBook.Extensions;
 using PlanningBook.Themes.Application.Domain.Invoices.Commands;
+using Stripe;
 
 namespace PlanningBook.Themes.API.Controllers
 {
@@ -18,6 +19,20 @@ namespace PlanningBook.Themes.API.Controllers
         public async Task<ActionResult<CommandResult<Guid>>> CreateAsync([FromBody] CreateInvoiceCommand command)
         {
             var currentUserId = User.GetCurrentAccountId();
+            command.UserId = currentUserId;
+
+            var result = await _commandExecutor.ExecuteAsync(command);
+
+            if (result.IsSuccess)
+                return Ok(result);
+            else
+                return BadRequest(result);
+        }
+
+        [HttpPost("payment-intent")]
+        public async Task<ActionResult<CommandResult<PaymentIntent>>> CreateAsync([FromBody] CreatePaymentIntentCommand command)
+        {
+            var currentUserId = User.GetCurrentAccountId()??Guid.Empty;
             command.UserId = currentUserId;
 
             var result = await _commandExecutor.ExecuteAsync(command);

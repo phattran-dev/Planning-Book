@@ -17,6 +17,7 @@ namespace PlanningBook.Themes.Application.Domain.Invoices.Commands
         public Guid? UserId { get; set; }
         public decimal? Price { get; set; }
         public bool IsUseStripePrice { get; set; }
+        public bool IsAutoSavePayment { get; set; } = false;
         public ValidationResult GetValidationResult()
         {
             return ValidationResult.Success();
@@ -52,11 +53,12 @@ namespace PlanningBook.Themes.Application.Domain.Invoices.Commands
             await _invoiceRepository.SaveChangeAsync(cancellationToken);
 
             var actualyProductPrice = command.Price ?? productExited.Price;
+            var customerId = command.IsAutoSavePayment ? userExisted.StripeCustomerId : null;
             Session session = null;
             if (command.IsUseStripePrice)
-                session = await _stripePaymentService.CheckoutSessionAsync(command.OriginUrl, invoice.Id, productExited.ProductType, 0, productExited.StripePriceId);
+                session = await _stripePaymentService.CheckoutSessionAsync(command.OriginUrl, userExisted.UserId, invoice.Id, productExited.ProductType, 0, productExited.StripePriceId, null, customerId);
             else
-                session = await _stripePaymentService.CheckoutSessionAsync(command.OriginUrl, invoice.Id, productExited.ProductType, actualyProductPrice);
+                session = await _stripePaymentService.CheckoutSessionAsync(command.OriginUrl, userExisted.UserId, invoice.Id, productExited.ProductType, actualyProductPrice, null, null, customerId);
 
             if(session != null)
             {
@@ -69,6 +71,7 @@ namespace PlanningBook.Themes.Application.Domain.Invoices.Commands
                     AmountTotal = session.AmountTotal,
                     Currency = session.Currency,
                     Url = session.Url,
+                    SubscriptionId = session.SubscriptionId
                 };
                 return CommandResult<CreateInvoiceCommandResult>.Success(result);
             }
