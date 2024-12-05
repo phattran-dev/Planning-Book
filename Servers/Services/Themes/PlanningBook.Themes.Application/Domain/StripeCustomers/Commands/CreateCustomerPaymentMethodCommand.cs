@@ -44,8 +44,6 @@ namespace PlanningBook.Themes.Application.Domain.StripeCustomers.Commands
             if (customerPayment == null)
                 return CommandResult<string>.Failure("Create Failed");
 
-            customerExisted.StripePaymentMethodId = customerPayment;
-
             await _stripeCustomerRepository.UpdateAsync(customerExisted, cancellationToken);
             await _stripeCustomerRepository.SaveChangeAsync(cancellationToken);
 

@@ -30,7 +30,7 @@ namespace PlanningBook.Themes.API.Controllers
         }
 
         [HttpPost("payment-intent")]
-        public async Task<ActionResult<CommandResult<PaymentIntent>>> CreateAsync([FromBody] CreatePaymentIntentCommand command)
+        public async Task<ActionResult<CommandResult<bool>>> CreateAsync([FromBody] CreatePaymentIntentCommand command)
         {
             var currentUserId = User.GetCurrentAccountId()??Guid.Empty;
             command.UserId = currentUserId;

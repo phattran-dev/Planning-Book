@@ -16,4 +16,8 @@
     <ProjectReference Include="..\PlanningBook.Themes.Infrastructure\PlanningBook.Themes.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Domain\StripeCustomers\Commands\Models\" />
+  </ItemGroup>
+
 </Project>

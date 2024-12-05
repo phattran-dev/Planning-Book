@@ -5,6 +5,7 @@ using PlanningBook.Domain.Interfaces;
 using PlanningBook.Extensions;
 using PlanningBook.Themes.Application.Domain.Invoices.Commands;
 using PlanningBook.Themes.Application.Domain.StripeCustomers.Commands;
+using PlanningBook.Themes.Infrastructure.Entities;
 
 namespace PlanningBook.Themes.API.Controllers
 {
@@ -57,15 +58,18 @@ namespace PlanningBook.Themes.API.Controllers
                 return BadRequest(result);
         }
 
-        //[HttpPost("resume-subscription")]
-        //public async Task<ActionResult<CommandResult<bool>>> ResumeSubscriptionAsync([FromBody] ResumeSubscriptionCommand command)
-        //{
-        //    var result = await _commandExecutor.ExecuteAsync(command);
+        [HttpPut("update-customer")]
+        public async Task<ActionResult<CommandResult<StripeCustomer>>> UpdateCustomerAsync([FromBody] UpdateStripeCustomerCommand command)
+        {
+            var currentUserId = User.GetCurrentAccountId() ?? Guid.Empty;
+            command.UserId = currentUserId;
 
-        //    if (result.IsSuccess)
-        //        return Ok(result);
-        //    else
-        //        return BadRequest(result);
-        //}
+            var result = await _commandExecutor.ExecuteAsync(command);
+
+            if (result.IsSuccess)
+                return Ok(result);
+            else
+                return BadRequest(result);
+        }
     }
 }

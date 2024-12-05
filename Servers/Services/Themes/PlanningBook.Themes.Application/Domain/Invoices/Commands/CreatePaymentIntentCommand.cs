@@ -30,7 +30,7 @@ namespace PlanningBook.Themes.Application.Domain.Invoices.Commands
     {
         public async Task<CommandResult<bool>> HandleAsync(CreatePaymentIntentCommand command, CancellationToken cancellationToken = default)
         {
-            var userExsited = await _stripeCustomerRepository.GetByIdAsync(command.UserId);
+            var userExsited = await _stripeCustomerRepository.GetFirstAsync(x => x.UserId == command.UserId);
             if (userExsited == null)
                 return CommandResult<bool>.Failure("User Not Found!");
 
