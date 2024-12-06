@@ -47,7 +47,7 @@ namespace PlanningBook.Themes.Application.Services
                             },
                             UnitAmount = (long)price*100
                         },
-                        Quantity = 1
+                        Quantity = 1,
                     }
                 };
 
@@ -170,7 +170,14 @@ namespace PlanningBook.Themes.Application.Services
                 Customer = customerId,
                 PaymentMethod = paymentMethodId,
                 Confirm = true,
-                ConfirmationMethod = "automatic"
+                //ConfirmationMethod = "automatic",
+                ReturnUrl = "http://localhost:5003",
+                AutomaticPaymentMethods = new PaymentIntentAutomaticPaymentMethodsOptions()
+                {
+                    Enabled = true,
+                    AllowRedirects = "never"
+                }
+                
             };
 
             return await _paymentIntentService.CreateAsync(options);
