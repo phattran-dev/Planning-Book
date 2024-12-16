@@ -40,7 +40,6 @@ namespace PlanningBook.Identity.Application.ClientAccounts.Commands
         UserManager<Account> _userManager,
         SignInManager<Account> _signInManager,
         IConfiguration _configuration,
-        IEFClassRepository<PBIdentityDbContext, AccountToken, Guid> _accountTokenRepository,
         IPasswordHasher _passwordHasher,
         ITokenProvider _tokenProvider)
         : ICommandHandler<SignInClientAccountCommand, CommandResult<SignInClientAccountCommandResult>>
@@ -54,7 +53,7 @@ namespace PlanningBook.Identity.Application.ClientAccounts.Commands
                 .FirstOrDefaultAsync(account => account.NormalizedUserName.Equals(command.UserName.ToUpper()));
 
             // TODO: Seperate error & log
-            if (accountExisted == null || !accountExisted.IsActive || accountExisted.IsDeleted)
+            if (accountExisted == null)
                 return CommandResult<SignInClientAccountCommandResult>.Failure(null, null);
 
             var validPassword = _passwordHasher.Verify(command.Password, accountExisted.PasswordHash);

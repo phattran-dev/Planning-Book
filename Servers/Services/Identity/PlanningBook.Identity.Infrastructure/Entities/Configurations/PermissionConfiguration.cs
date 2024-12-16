@@ -3,9 +3,9 @@ using PlanningBook.DBEngine;
 
 namespace PlanningBook.Identity.Infrastructure.Entities.Configurations
 {
-    public class RoleClaimConfiguration : BaseRelationDbEntityTypeConfiguration<RoleClaim>
+    public class PermissionConfiguration : BaseRelationDbEntityTypeConfiguration<Permission>
     {
-        public override void Configure(EntityTypeBuilder<RoleClaim> builder)
+        public override void Configure(EntityTypeBuilder<Permission> builder)
         {
             base.Configure(builder);
         }

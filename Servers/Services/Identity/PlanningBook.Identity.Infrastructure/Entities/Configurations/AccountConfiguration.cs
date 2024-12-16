@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PlanningBook.DBEngine;
 
 namespace PlanningBook.Identity.Infrastructure.Entities.Configurations
@@ -10,30 +9,11 @@ namespace PlanningBook.Identity.Infrastructure.Entities.Configurations
         {
             base.Configure(builder);
 
-            //builder.HasMany(a => a.Claims)
-            //    .WithOne(ac => ac.Account)
-            //    .HasForeignKey(ac => ac.AccountId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
-            //builder.HasMany(a => a.Logins)
-            //    .WithOne(l => l.Account)
-            //    .HasForeignKey(l => l.AccountId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
-            //builder.HasMany(a => a.Roles)
-            //    .WithOne(r => r.Account)
-            //    .HasForeignKey(r => r.AccountId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
-            //builder.HasMany(a => a.Tokens)
-            //    .WithOne(t => t.Account)
-            //    .HasForeignKey(t => t.AccountId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
-            //builder.HasMany(a => a.Persons)
-            //    .WithOne(p => p.Account)
-            //    .HasForeignKey(p => p.AccountId)
-            //    .OnDelete(DeleteBehavior.Restrict);
+            builder.HasData(new Account()
+            {
+                Id = new Guid("53f39533-b6d0-4f06-9d1e-74e8772c2631"),
+                UserName = "Identity_System"
+            });
         }
     }
 }

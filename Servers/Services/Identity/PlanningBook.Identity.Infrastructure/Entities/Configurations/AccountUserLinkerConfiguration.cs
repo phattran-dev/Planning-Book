@@ -3,9 +3,9 @@ using PlanningBook.DBEngine;
 
 namespace PlanningBook.Identity.Infrastructure.Entities.Configurations
 {
-    public class RoleConfiguration : BaseRelationDbEntityTypeConfiguration<Role>
+    public class AccountUserLinkerConfiguration : BaseRelationDbEntityTypeConfiguration<AccountUserLinker>
     {
-        public override void Configure(EntityTypeBuilder<Role> builder)
+        public override void Configure(EntityTypeBuilder<AccountUserLinker> builder)
         {
             base.Configure(builder);
         }

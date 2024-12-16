@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PlanningBook.Identity.Infrastructure.Entities;
 using System.Reflection;
 
 namespace PlanningBook.Identity.Infrastructure
 {
-    public class PBIdentityDbContext : IdentityDbContext<Account, Role, Guid, AccountClaim, AccountRole, AccountLogin, RoleClaim, AccountToken>
+    //IdentityDbContext<Account, Role, Guid, IdentityAccountClaim, AccountRoleLinker, IdentityAccountLogin, IdentityRoleClaim<Guid>, IdentityAccountToken>
+    public class PBIdentityDbContext : IdentityDbContext<Account, Role, Guid>
     {
         public PBIdentityDbContext(DbContextOptions<PBIdentityDbContext> options) : base(options) { }
 

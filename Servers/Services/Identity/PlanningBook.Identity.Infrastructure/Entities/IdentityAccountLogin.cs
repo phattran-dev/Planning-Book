@@ -2,9 +2,8 @@
 
 namespace PlanningBook.Identity.Infrastructure.Entities
 {
-    public class AccountClaim : IdentityUserClaim<Guid>
+    public class IdentityAccountLogin : IdentityUserLogin<Guid>
     {
         public Guid AccountId { get; set; }
-        public Account Account { get; set; }
     }
 }

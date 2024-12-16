@@ -2,7 +2,8 @@
 
 namespace PlanningBook.Identity.Infrastructure.Entities
 {
-    public class RoleClaim : IdentityRoleClaim<Guid>
+    public class IdentityAccountClaim : IdentityUserClaim<Guid>
     {
+        public Guid AccountId { get; set; }
     }
 }

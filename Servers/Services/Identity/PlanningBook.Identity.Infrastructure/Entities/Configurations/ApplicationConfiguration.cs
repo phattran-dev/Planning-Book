@@ -3,9 +3,9 @@ using PlanningBook.DBEngine;
 
 namespace PlanningBook.Identity.Infrastructure.Entities.Configurations
 {
-    public class RevokedTokenConfiguration : BaseRelationDbEntityTypeConfiguration<RevokedToken>
+    public class ApplicationConfiguration : BaseRelationDbEntityTypeConfiguration<Application>
     {
-        public override void Configure(EntityTypeBuilder<RevokedToken> builder)
+        public override void Configure(EntityTypeBuilder<Application> builder)
         {
             base.Configure(builder);
         }

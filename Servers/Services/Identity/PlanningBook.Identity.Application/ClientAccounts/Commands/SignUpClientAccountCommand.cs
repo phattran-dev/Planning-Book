@@ -64,9 +64,7 @@ namespace PlanningBook.Identity.Application.Accounts.Commands
             if (!string.IsNullOrWhiteSpace(command.Email))
             {
                 var isEmailUsed = await _accountManager.Users
-                    .AnyAsync(account => account.Email == command.Email &&
-                        account.IsActive &&
-                        !account.IsDeleted, cancellationToken);
+                    .AnyAsync(account => account.Email == command.Email, cancellationToken);
                 if (isEmailUsed)
                 {
                     // TODO: Log Error & Return Error
@@ -77,9 +75,7 @@ namespace PlanningBook.Identity.Application.Accounts.Commands
             if (!string.IsNullOrWhiteSpace(command.PhoneNumber))
             {
                 var isPhoneUsed = await _accountManager.Users
-                    .AnyAsync(account => account.PhoneNumber == command.PhoneNumber &&
-                        account.IsActive &&
-                        !account.IsDeleted, cancellationToken);
+                    .AnyAsync(account => account.PhoneNumber == command.PhoneNumber, cancellationToken);
 
                 if (isPhoneUsed)
                 {
@@ -91,9 +87,7 @@ namespace PlanningBook.Identity.Application.Accounts.Commands
             var accountExisted = await _accountManager.Users
                 .AnyAsync(account => account.UserName == command.Username
                 && account.Email == command.Email
-                && account.PhoneNumber == command.PhoneNumber
-                && account.IsActive
-                && !account.IsDeleted, cancellationToken);
+                && account.PhoneNumber == command.PhoneNumber, cancellationToken);
 
             if (accountExisted)
             {
@@ -114,8 +108,6 @@ namespace PlanningBook.Identity.Application.Accounts.Commands
                 NormalizedEmail = command?.Email?.ToUpper(),
                 PhoneNumber = command?.PhoneNumber,
                 PasswordHash = passwordHash,
-                IsDeleted = false,
-                IsActive = true
             };
 
             var result = await _accountManager.CreateAsync(account);
@@ -135,7 +127,7 @@ namespace PlanningBook.Identity.Application.Accounts.Commands
             var jsonContent = new StringContent(JsonSerializer.Serialize(command), Encoding.UTF8, "application/json");
             var response = await client.PostAsync("ExposurePerson/Create", jsonContent);
 
-            if(response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
                 var test = 1;
             }

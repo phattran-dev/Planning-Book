@@ -29,8 +29,6 @@ namespace PlanningBook.Identity.Application.ClientAccounts.Commands
     public sealed class SignOutClientAccountCommandHandler(
         SignInManager<Account> _signInManager,
         UserManager<Account> _accountManager,
-        IEFClassRepository<PBIdentityDbContext, AccountToken, Guid> _accountTokenRepository,
-        IEFRepository<PBIdentityDbContext, RevokedToken, string> _revokedTokenRepository,
         PBIdentityDbContext _pBIdentityDbContext)
         : ICommandHandler<SignOutClientAccountCommand, CommandResult<bool>>
     {
@@ -39,25 +37,25 @@ namespace PlanningBook.Identity.Application.ClientAccounts.Commands
             if (!command.GetValidationResult().IsValid)
                 return CommandResult<bool>.Failure(null, null);
 
-            var tokenExisted = await _accountTokenRepository
-                .GetFirstAsync(x => x.AccountId == command.AccountId &&
-                                    x.Token == command.Token, cancellationToken);
+            //var tokenExisted = await _accountTokenRepository
+            //    .GetFirstAsync(x => x.AccountId == command.AccountId &&
+            //                        x.Token == command.Token, cancellationToken);
 
-            if (tokenExisted == null || tokenExisted.IsRevoked)
-            {
-                // TODO: Log error
-                return CommandResult<bool>.Success(true);
-            }
+            //if (tokenExisted == null || tokenExisted.IsRevoked)
+            //{
+            //    // TODO: Log error
+            //    return CommandResult<bool>.Success(true);
+            //}
 
-            tokenExisted.IsRevoked = true;
-            await _accountTokenRepository.UpdateAsync(tokenExisted, cancellationToken);
-            //await _accountTokenRepository.SaveChangeAsync();
+            //tokenExisted.IsRevoked = true;
+            //await _accountTokenRepository.UpdateAsync(tokenExisted, cancellationToken);
+            ////await _accountTokenRepository.SaveChangeAsync();
 
-            var revokedToken = new RevokedToken()
-            {
-                Id = tokenExisted.Token
-            };
-            await _revokedTokenRepository.AddAsync(revokedToken, cancellationToken);
+            //var revokedToken = new RevokedToken()
+            //{
+            //    Id = tokenExisted.Token
+            //};
+            //await _revokedTokenRepository.AddAsync(revokedToken, cancellationToken);
 
             await _signInManager.SignOutAsync();
 

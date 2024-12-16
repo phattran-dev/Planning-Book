@@ -45,9 +45,7 @@ namespace PlanningBook.Identity.Application.ClientAccounts.Commands
                 return CommandResult<bool>.Failure(null, null);
 
             var userExisted = await _userManager.Users
-                    .FirstOrDefaultAsync(account => account.Id == command.UserId &&
-                        account.IsActive &&
-                        !account.IsDeleted, cancellationToken);
+                    .FirstOrDefaultAsync(account => account.Id == command.UserId, cancellationToken);
 
             if (userExisted == null)
                 return CommandResult<bool>.Failure(null, null);
