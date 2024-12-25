@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\Presitance\PlanningBook.DBEngine\PlanningBook.DBEngine.csproj" />
+    <ProjectReference Include="..\..\..\Frameworks\PlanningBook.Contants\PlanningBook.Contants.csproj" />
     <ProjectReference Include="..\..\..\Frameworks\Planning_book.Domain\PlanningBook.Domain.csproj" />
   </ItemGroup>
 

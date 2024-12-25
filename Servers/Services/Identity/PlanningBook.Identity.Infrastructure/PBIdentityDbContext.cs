@@ -7,7 +7,7 @@ using System.Reflection;
 namespace PlanningBook.Identity.Infrastructure
 {
     //IdentityDbContext<Account, Role, Guid, IdentityAccountClaim, AccountRoleLinker, IdentityAccountLogin, IdentityRoleClaim<Guid>, IdentityAccountToken>
-    public class PBIdentityDbContext : IdentityDbContext<Account, Role, Guid>
+    public class PBIdentityDbContext : IdentityDbContext<Account, Role, Guid, IdentityAccountClaim, AccountRoleLinker, IdentityAccountLogin, IdentityAccountRoleClaim, IdentityAccountToken>
     {
         public PBIdentityDbContext(DbContextOptions<PBIdentityDbContext> options) : base(options) { }
 

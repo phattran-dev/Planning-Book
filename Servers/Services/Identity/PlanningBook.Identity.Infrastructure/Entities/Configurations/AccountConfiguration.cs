@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using PlanningBook.Contants;
 using PlanningBook.DBEngine;
+using PlanningBook.Identity.Infrastructure.Enums;
 
 namespace PlanningBook.Identity.Infrastructure.Entities.Configurations
 {
@@ -11,8 +13,9 @@ namespace PlanningBook.Identity.Infrastructure.Entities.Configurations
 
             builder.HasData(new Account()
             {
-                Id = new Guid("53f39533-b6d0-4f06-9d1e-74e8772c2631"),
-                UserName = "Identity_System"
+                Id = new Guid(SystemSeed.IDENTITY_SYSTEM_ID),
+                UserName = "Identity_System",
+                Status = AccountStatus.Active
             });
         }
     }
