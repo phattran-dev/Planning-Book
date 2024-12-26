@@ -5,7 +5,5 @@ namespace PlanningBook.Identity.Infrastructure.Entities
     public class AccountRoleLinker : IdentityUserRole<Guid>
     {
         public Guid AccountId { get; set; }
-        public Account Account { get; set; }
-        public Role Role { get; set; }
     }
 }

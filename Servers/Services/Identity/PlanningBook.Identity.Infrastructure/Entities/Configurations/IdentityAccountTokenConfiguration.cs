@@ -11,7 +11,7 @@ namespace PlanningBook.Identity.Infrastructure.Entities.Configurations
             base.Configure(builder);
 
             builder.Property(r => r.UserId)
-                .HasColumnName(nameof(AccountRoleLinker.AccountId));
+                .HasColumnName(nameof(IdentityAccountToken.AccountId));
             builder.Ignore(r => r.AccountId);
         }
     }

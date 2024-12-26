@@ -14,7 +14,7 @@ namespace PlanningBook.Identity.Infrastructure.Entities
         public Guid? UpdatedBy { get; set; }
 
         public ICollection<AccountPersonLinker> AccountUserLinkers { get; set; }
-        public ICollection<AccountRoleLinker> AccountRoleLinkers { get; set; }
+        //public ICollection<AccountRoleLinker> AccountRoleLinkers { get; set; }
         public ICollection<AccountPermissionLinker> AccountPermissionLinkers { get; set; }
     }
 }
