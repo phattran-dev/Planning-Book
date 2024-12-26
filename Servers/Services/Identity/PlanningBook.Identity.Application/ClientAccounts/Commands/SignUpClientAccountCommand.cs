@@ -14,10 +14,10 @@ namespace PlanningBook.Identity.Application.Accounts.Commands
     public sealed class SignUpClientAccountCommand : ICommand<CommandResult<Guid>>
     {
         public string Username { get; set; }
-        public string Password { get; set; } // TO DO: Should not plain text from FE -> BE
-        public string? Email { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
         public string? PhoneNumber { get; set; }
-        public SignUpClientAccountCommand(string username, string password, string? email, string? phoneNumber)
+        public SignUpClientAccountCommand(string username, string password, string email, string? phoneNumber)
         {
             Username = username;
             Password = password;

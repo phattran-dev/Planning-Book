@@ -23,6 +23,7 @@ builder.Services.AddPBIdentityDbContext(configuration);
 builder.Services
     .AddServices()
     .RegistryCommandQueryExecutor(configuration)
+    .RegistryCustomerModule(configuration)
     .RegistryAccountModule(configuration);
 #endregion Add Services
 

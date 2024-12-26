@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="ClientAccounts\Queries\" />
+    <Folder Include="Domains\Customers\Commands\CommandResults\" />
   </ItemGroup>
 
   <ItemGroup>

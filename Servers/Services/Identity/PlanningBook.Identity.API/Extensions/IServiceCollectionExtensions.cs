@@ -3,6 +3,7 @@ using PlanningBook.Domain.Interfaces;
 using PlanningBook.Identity.Application.Accounts.Commands;
 using PlanningBook.Identity.Application.ClientAccounts.Commands;
 using PlanningBook.Identity.Application.ClientAccounts.Commands.CommandResults;
+using PlanningBook.Identity.Application.Domains.Customers.Commands;
 using PlanningBook.Identity.Application.Helpers;
 using PlanningBook.Identity.Application.Helpers.Interfaces;
 using PlanningBook.Identity.Application.Providers;
@@ -34,6 +35,17 @@ namespace PlanningBook.Identity.API.Extensions
         {
             services.AddTransient<ICommandExecutor, CommandExecutor>();
             services.AddTransient<IQueryExecutor, QueryExecutor>();
+            return services;
+        }
+
+        public static IServiceCollection RegistryCustomerModule(this IServiceCollection services, IConfiguration configuration)
+        {
+            #region Commands
+            services.AddScoped<ICommandHandler<SignUpCustomerCommand, CommandResult<Guid>>, SignUpCustomerCommandHadnler>();
+            #endregion Commands
+
+            #region Queries
+            #endregion Queries
             return services;
         }
 

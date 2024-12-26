@@ -5,6 +5,7 @@
         Active, 
         Deactive,
         Banned,
-        Deleted
+        Deleted,
+        InRegistrationProcess,
     }
 }
