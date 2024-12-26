@@ -24,8 +24,8 @@ namespace PlanningBook.Repository.EF
         {
             if (entity is IDateAudited)
             {
-                ((IDateAudited)entity).CreatedDate = DateTime.UtcNow;
-                ((IDateAudited)entity).UpdatedDate = DateTime.UtcNow;
+                ((IDateAudited)entity).CreatedDate = DateTimeOffset.UtcNow;
+                ((IDateAudited)entity).UpdatedDate = DateTimeOffset.UtcNow;
             }
 
             if (entity is ISoftDeleted)
@@ -51,8 +51,8 @@ namespace PlanningBook.Repository.EF
                 {
                     if (entity is IDateAudited)
                     {
-                        ((IDateAudited)entity).CreatedDate = DateTime.UtcNow;
-                        ((IDateAudited)entity).UpdatedDate = DateTime.UtcNow;
+                        ((IDateAudited)entity).CreatedDate = DateTimeOffset.UtcNow;
+                        ((IDateAudited)entity).UpdatedDate = DateTimeOffset.UtcNow;
                     }
 
                     if (entity is ISoftDeleted)
@@ -202,7 +202,7 @@ namespace PlanningBook.Repository.EF
             _dbContext.Entry(entity).State = EntityState.Modified;
             if (entity is IDateAudited)
             {
-                ((IDateAudited)entity).UpdatedDate = DateTime.UtcNow;
+                ((IDateAudited)entity).UpdatedDate = DateTimeOffset.UtcNow;
             }
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
@@ -222,8 +222,8 @@ namespace PlanningBook.Repository.EF
         {
             if (entity is IDateAudited)
             {
-                ((IDateAudited)entity).CreatedDate = DateTime.UtcNow;
-                ((IDateAudited)entity).UpdatedDate = DateTime.UtcNow;
+                ((IDateAudited)entity).CreatedDate = DateTimeOffset.UtcNow;
+                ((IDateAudited)entity).UpdatedDate = DateTimeOffset.UtcNow;
             }
 
             if (entity is ISoftDeleted)
@@ -248,8 +248,8 @@ namespace PlanningBook.Repository.EF
                 {
                     if (entity is IDateAudited)
                     {
-                        ((IDateAudited)entity).CreatedDate = DateTime.UtcNow;
-                        ((IDateAudited)entity).UpdatedDate = DateTime.UtcNow;
+                        ((IDateAudited)entity).CreatedDate = DateTimeOffset.UtcNow;
+                        ((IDateAudited)entity).UpdatedDate = DateTimeOffset.UtcNow;
                     }
 
                     if (entity is ISoftDeleted)
@@ -407,7 +407,7 @@ namespace PlanningBook.Repository.EF
             _dbContext.Entry(entity).State = EntityState.Modified;
             if (entity is IDateAudited)
             {
-                ((IDateAudited)entity).UpdatedDate = DateTime.UtcNow;
+                ((IDateAudited)entity).UpdatedDate = DateTimeOffset.UtcNow;
             }
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
@@ -447,8 +447,8 @@ namespace PlanningBook.Repository.EF
             var entity = _mapper.Map<TEntity>(model);
             if (entity is IDateAudited)
             {
-                ((IDateAudited)entity).CreatedDate = DateTime.UtcNow;
-                ((IDateAudited)entity).UpdatedDate = DateTime.UtcNow;
+                ((IDateAudited)entity).CreatedDate = DateTimeOffset.UtcNow;
+                ((IDateAudited)entity).UpdatedDate = DateTimeOffset.UtcNow;
             }
 
             if (entity is ISoftDeleted)
@@ -475,8 +475,8 @@ namespace PlanningBook.Repository.EF
                 {
                     if (entity is IDateAudited)
                     {
-                        ((IDateAudited)entity).CreatedDate = DateTime.UtcNow;
-                        ((IDateAudited)entity).UpdatedDate = DateTime.UtcNow;
+                        ((IDateAudited)entity).CreatedDate = DateTimeOffset.UtcNow;
+                        ((IDateAudited)entity).UpdatedDate = DateTimeOffset.UtcNow;
                     }
 
                     if (entity is ISoftDeleted)
@@ -555,8 +555,8 @@ namespace PlanningBook.Repository.EF
             var entity = _mapper.Map<TEntity>(model);
             if (entity is IDateAudited)
             {
-                ((IDateAudited)entity).CreatedDate = DateTime.UtcNow;
-                ((IDateAudited)entity).UpdatedDate = DateTime.UtcNow;
+                ((IDateAudited)entity).CreatedDate = DateTimeOffset.UtcNow;
+                ((IDateAudited)entity).UpdatedDate = DateTimeOffset.UtcNow;
             }
 
             if (entity is ISoftDeleted)
@@ -584,8 +584,8 @@ namespace PlanningBook.Repository.EF
                 {
                     if (entity is IDateAudited)
                     {
-                        ((IDateAudited)entity).CreatedDate = DateTime.UtcNow;
-                        ((IDateAudited)entity).UpdatedDate = DateTime.UtcNow;
+                        ((IDateAudited)entity).CreatedDate = DateTimeOffset.UtcNow;
+                        ((IDateAudited)entity).UpdatedDate = DateTimeOffset.UtcNow;
                     }
 
                     if (entity is ISoftDeleted)

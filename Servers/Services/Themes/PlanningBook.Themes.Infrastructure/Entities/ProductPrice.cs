@@ -7,7 +7,7 @@ namespace PlanningBook.Themes.Infrastructure.Entities
     {
         public Guid ProductId { get; set; }
         public Guid PriceId { get; set; }
-        public DateTime? CreatedDate { get; set; }
-        public DateTime? UpdatedDate { get; set; }
+        public DateTimeOffset? CreatedDate { get; set; }
+        public DateTimeOffset? UpdatedDate { get; set; }
     }
 }

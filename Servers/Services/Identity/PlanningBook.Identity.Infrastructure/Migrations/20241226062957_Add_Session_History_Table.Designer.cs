@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlanningBook.Identity.Infrastructure;
 
@@ -11,9 +12,11 @@ using PlanningBook.Identity.Infrastructure;
 namespace PlanningBook.Identity.Infrastructure.Migrations
 {
     [DbContext(typeof(PBIdentityDbContext))]
-    partial class PBIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241226062957_Add_Session_History_Table")]
+    partial class Add_Session_History_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,8 +41,8 @@ namespace PlanningBook.Identity.Infrastructure.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTimeOffset?>("CreatedDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -86,8 +89,8 @@ namespace PlanningBook.Identity.Infrastructure.Migrations
                     b.Property<Guid?>("UpdatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTimeOffset?>("UpdatedDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
@@ -110,7 +113,7 @@ namespace PlanningBook.Identity.Infrastructure.Migrations
                         {
                             Id = new Guid("53f39533-b6d0-4f06-9d1e-74e8772c2631"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ae9b83b8-ecd3-4c7d-a03e-84d733243db7",
+                            ConcurrencyStamp = "8e6a68ac-3e32-4f77-b443-fe8e3624473a",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
